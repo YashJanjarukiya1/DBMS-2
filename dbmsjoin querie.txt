@@ -1,0 +1,151 @@
+mysql> create table student(stu_id int(10),stu_name varchar(50),stu_rollno int(20),stu_address varchar(50));
+Query OK, 0 rows affected, 2 warnings (0.03 sec)
+
+mysql> insert into student values(1,"yash",5,"rajkot");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into student values(2,"dhaval",10,"kalana");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into student values(3,"mayur",45,"rajsthan");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into student values(4,"janvi",30,"surat");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into student values(5,"shreya",93,"gondal");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from student;
++--------+----------+------------+-------------+
+| stu_id | stu_name | stu_rollno | stu_address |
++--------+----------+------------+-------------+
+|      1 | yash     |          5 | rajkot      |
+|      2 | dhaval   |         10 | kalana      |
+|      3 | mayur    |         45 | rajsthan    |
+|      4 | janvi    |         30 | surat       |
+|      5 | shreya   |         93 | gondal      |
++--------+----------+------------+-------------+
+5 rows in set (0.00 sec)
+
+mysql> create table officer(off_id int(10),off_name varchar(50),off_depa varchar(50),off_address varchar(50));
+Query OK, 0 rows affected, 1 warning (0.05 sec)
+
+mysql> insert into officer values(1,"yash","manager","rajkot");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into officer values(2,"harit","gard","khadiya");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into officer values(3,"janki","developer","kalana");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into officer values(4,"janvi","sineordeveloper","rajasthan");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into officer values(5,"shreya","juniordeveloper","gondal");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from officer;
++--------+----------+-----------------+-------------+
+| off_id | off_name | off_depa        | off_address |
++--------+----------+-----------------+-------------+
+|      1 | yash     | manager         | rajkot      |
+|      2 | harit    | gard            | khadiya     |
+|      3 | janki    | developer       | kalana      |
+|      4 | janvi    | sineordeveloper | rajasthan   |
+|      5 | shreya   | juniordeveloper | gondal      |
++--------+----------+-----------------+-------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from student cross join officer;
++--------+----------+------------+-------------+--------+----------+-----------------+-------------+
+| stu_id | stu_name | stu_rollno | stu_address | off_id | off_name | off_depa        | off_address |
++--------+----------+------------+-------------+--------+----------+-----------------+-------------+
+|      5 | shreya   |         93 | gondal      |      1 | yash     | manager         | rajkot      |
+|      4 | janvi    |         30 | surat       |      1 | yash     | manager         | rajkot      |
+|      3 | mayur    |         45 | rajsthan    |      1 | yash     | manager         | rajkot      |
+|      2 | dhaval   |         10 | kalana      |      1 | yash     | manager         | rajkot      |
+|      1 | yash     |          5 | rajkot      |      1 | yash     | manager         | rajkot      |
+|      5 | shreya   |         93 | gondal      |      2 | harit    | gard            | khadiya     |
+|      4 | janvi    |         30 | surat       |      2 | harit    | gard            | khadiya     |
+|      3 | mayur    |         45 | rajsthan    |      2 | harit    | gard            | khadiya     |
+|      2 | dhaval   |         10 | kalana      |      2 | harit    | gard            | khadiya     |
+|      1 | yash     |          5 | rajkot      |      2 | harit    | gard            | khadiya     |
+|      5 | shreya   |         93 | gondal      |      3 | janki    | developer       | kalana      |
+|      4 | janvi    |         30 | surat       |      3 | janki    | developer       | kalana      |
+|      3 | mayur    |         45 | rajsthan    |      3 | janki    | developer       | kalana      |
+|      2 | dhaval   |         10 | kalana      |      3 | janki    | developer       | kalana      |
+|      1 | yash     |          5 | rajkot      |      3 | janki    | developer       | kalana      |
+|      5 | shreya   |         93 | gondal      |      4 | janvi    | sineordeveloper | rajasthan   |
+|      4 | janvi    |         30 | surat       |      4 | janvi    | sineordeveloper | rajasthan   |
+|      3 | mayur    |         45 | rajsthan    |      4 | janvi    | sineordeveloper | rajasthan   |
+|      2 | dhaval   |         10 | kalana      |      4 | janvi    | sineordeveloper | rajasthan   |
+|      1 | yash     |          5 | rajkot      |      4 | janvi    | sineordeveloper | rajasthan   |
+|      5 | shreya   |         93 | gondal      |      5 | shreya   | juniordeveloper | gondal      |
+|      4 | janvi    |         30 | surat       |      5 | shreya   | juniordeveloper | gondal      |
+|      3 | mayur    |         45 | rajsthan    |      5 | shreya   | juniordeveloper | gondal      |
+|      2 | dhaval   |         10 | kalana      |      5 | shreya   | juniordeveloper | gondal      |
+|      1 | yash     |          5 | rajkot      |      5 | shreya   | juniordeveloper | gondal      |
++--------+----------+------------+-------------+--------+----------+-----------------+-------------+
+25 rows in set (0.00 sec)
+
+
+mysql> select student.stu_name,officer.off_address from student left join officer on student.stu_id=officer.off_id order by student.stu_name;
++----------+-------------+
+| stu_name | off_address |
++----------+-------------+
+| dhaval   | khadiya     |
+| janvi    | rajasthan   |
+| mayur    | kalana      |
+| shreya   | gondal      |
+| yash     | rajkot      |
++----------+-------------+
+5 rows in set (0.01 sec)
+
+mysql> select student.stu_name,officer.off_depa from student right join officer on student.stu_id=officer.off_id order by student.stu_address;
++----------+-----------------+
+| stu_name | off_depa        |
++----------+-----------------+
+| shreya   | juniordeveloper |
+| dhaval   | gard            |
+| yash     | manager         |
+| mayur    | developer       |
+| janvi    | sineordeveloper |
++----------+-----------------+
+5 rows in set (0.00 sec)
+
+
+mysql> select * from student natural join officer;
++--------+----------+------------+-------------+--------+----------+-----------------+-------------+
+| stu_id | stu_name | stu_rollno | stu_address | off_id | off_name | off_depa        | off_address |
++--------+----------+------------+-------------+--------+----------+-----------------+-------------+
+|      5 | shreya   |         93 | gondal      |      1 | yash     | manager         | rajkot      |
+|      4 | janvi    |         30 | surat       |      1 | yash     | manager         | rajkot      |
+|      3 | mayur    |         45 | rajsthan    |      1 | yash     | manager         | rajkot      |
+|      2 | dhaval   |         10 | kalana      |      1 | yash     | manager         | rajkot      |
+|      1 | yash     |          5 | rajkot      |      1 | yash     | manager         | rajkot      |
+|      5 | shreya   |         93 | gondal      |      2 | harit    | gard            | khadiya     |
+|      4 | janvi    |         30 | surat       |      2 | harit    | gard            | khadiya     |
+|      3 | mayur    |         45 | rajsthan    |      2 | harit    | gard            | khadiya     |
+|      2 | dhaval   |         10 | kalana      |      2 | harit    | gard            | khadiya     |
+|      1 | yash     |          5 | rajkot      |      2 | harit    | gard            | khadiya     |
+|      5 | shreya   |         93 | gondal      |      3 | janki    | developer       | kalana      |
+|      4 | janvi    |         30 | surat       |      3 | janki    | developer       | kalana      |
+|      3 | mayur    |         45 | rajsthan    |      3 | janki    | developer       | kalana      |
+|      2 | dhaval   |         10 | kalana      |      3 | janki    | developer       | kalana      |
+|      1 | yash     |          5 | rajkot      |      3 | janki    | developer       | kalana      |
+|      5 | shreya   |         93 | gondal      |      4 | janvi    | sineordeveloper | rajasthan   |
+|      4 | janvi    |         30 | surat       |      4 | janvi    | sineordeveloper | rajasthan   |
+|      3 | mayur    |         45 | rajsthan    |      4 | janvi    | sineordeveloper | rajasthan   |
+|      2 | dhaval   |         10 | kalana      |      4 | janvi    | sineordeveloper | rajasthan   |
+|      1 | yash     |          5 | rajkot      |      4 | janvi    | sineordeveloper | rajasthan   |
+|      5 | shreya   |         93 | gondal      |      5 | shreya   | juniordeveloper | gondal      |
+|      4 | janvi    |         30 | surat       |      5 | shreya   | juniordeveloper | gondal      |
+|      3 | mayur    |         45 | rajsthan    |      5 | shreya   | juniordeveloper | gondal      |
+|      2 | dhaval   |         10 | kalana      |      5 | shreya   | juniordeveloper | gondal      |
+|      1 | yash     |          5 | rajkot      |      5 | shreya   | juniordeveloper | gondal      |
++--------+----------+------------+-------------+--------+----------+-----------------+-------------+
+25 rows in set (0.00 sec)
+
+

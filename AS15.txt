@@ -1,0 +1,1194 @@
+NAME : Janjarukiya Yash Dilipbhai
+ROLLNO : AS15
+DIV : AS
+SUBJECT : DBMS-II
+
+First Assignment.
+=>
+
+1 => String Function.
+
+mysql> create table student(
+    -> E_Id int not null,
+    -> Name varchar(10),
+    -> Age int,
+    -> Address varchar(20),
+    -> Join_date date,
+    -> Leave_date date,
+    -> Salary bigint);
+Query OK, 0 rows affected (0.16 sec)
+
+mysql> desc student;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| E_Id       | int         | NO   |     | NULL    |       |
+| Name       | varchar(10) | YES  |     | NULL    |       |
+| Age        | int         | YES  |     | NULL    |       |
+| Address    | varchar(20) | YES  |     | NULL    |       |
+| Join_date  | date        | YES  |     | NULL    |       |
+| Leave_date | date        | YES  |     | NULL    |       |
+| Salary     | bigint      | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+7 rows in set (0.02 sec)
+
+mysql> insert into student values(101,"Akshay",22,"AHMEDABAD","2015-06-22","2022-08-30",22000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into student values(102,"Deep",24,"SURAT","2017-03-12","2021-05-22",25000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into student values(103,"Nisha",26,"Delhi","2015-04-22","2020-07-15",27000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into student values(104,"Bhavik",20,"Ahmedabad","2017-05-10","2022-06-23",21000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into student values(105,"Shanaya",27,"Chandigarh","2010-06-12","2022-05-30",28000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into student values(106,"Prisha",29,"Ahmedabad","2010-07-22","2021-06-12",30000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from student;
++------+---------+------+------------+------------+------------+--------+
+| E_Id | Name    | Age  | Address    | Join_date  | Leave_date | Salary |
++------+---------+------+------------+------------+------------+--------+
+|  101 | Akshay  |   22 | AHMEDABAD  | 2015-06-22 | 2022-08-30 |  22000 |
+|  102 | Deep    |   24 | SURAT      | 2017-03-12 | 2021-05-22 |  25000 |
+|  103 | Nisha   |   26 | Delhi      | 2015-04-22 | 2020-07-15 |  27000 |
+|  104 | Bhavik  |   20 | Ahmedabad  | 2017-05-10 | 2022-06-23 |  21000 |
+|  105 | Shanaya |   27 | Chandigarh | 2010-06-12 | 2022-05-30 |  28000 |
+|  106 | Prisha  |   29 | Ahmedabad  | 2010-07-22 | 2021-06-12 |  30000 |
++------+---------+------+------------+------------+------------+--------+
+6 rows in set (0.00 sec)
+
+mysql> select length(Name) from student;
++--------------+
+| length(Name) |
++--------------+
+|            6 |
+|            4 |
+|            5 |
+|            6 |
+|            7 |
+|            6 |
++--------------+
+6 rows in set (0.00 sec)
+
+mysql> select length(Address) from student;
++-----------------+
+| length(Address) |
++-----------------+
+|               9 |
+|               5 |
+|               5 |
+|               9 |
+|              10 |
+|               9 |
++-----------------+
+6 rows in set (0.00 sec)
+
+mysql> select length(Name)as Name_len,length(Address) as Addr_len from emp;
++----------+----------+
+| Name_len | Addr_len |
++----------+----------+
+|        6 |        9 |
+|        4 |        5 |
+|        5 |        5 |
+|        6 |        9 |
+|        7 |       10 |
+|        6 |        9 |
++----------+----------+
+6 rows in set (0.00 sec)
+
+mysql> select lcase(Name) as Lowercase from student;
++-----------+
+| Lowercase |
++-----------+
+| akshay    |
+| deep      |
+| nisha     |
+| bhavik    |
+| shanaya   |
+| prisha    |
++-----------+
+6 rows in set (0.00 sec)
+
+mysql> select lower(Name) as Lowercase from student;
++-----------+
+| Lowercase |
++-----------+
+| akshay    |
+| deep      |
+| nisha     |
+| bhavik    |
+| shanaya   |
+| prisha    |
++-----------+
+6 rows in set (0.00 sec)
+
+mysql> select upper(Name) as Uppercase from student;
++-----------+
+| Uppercase |
++-----------+
+| AKSHAY    |
+| DEEP      |
+| NISHA     |
+| BHAVIK    |
+| SHANAYA   |
+| PRISHA    |
++-----------+
+6 rows in set (0.00 sec)
+
+mysql> select ucase(Name) as Uppercase from student;
++-----------+
+| Uppercase |
++-----------+
+| AKSHAY    |
+| DEEP      |
+| NISHA     |
+| BHAVIK    |
+| SHANAYA   |
+| PRISHA    |
++-----------+
+6 rows in set (0.00 sec)
+
+mysql> select left(Name,4) from student;
++--------------+
+| left(Name,4) |
++--------------+
+| Aksh         |
+| Deep         |
+| Nish         |
+| Bhav         |
+| Shan         |
+| Pris         |
++--------------+
+6 rows in set (0.00 sec)
+
+mysql> select right(Name,4) from student;
++---------------+
+| right(Name,4) |
++---------------+
+| shay          |
+| Deep          |
+| isha          |
+| avik          |
+| naya          |
+| isha          |
++---------------+
+6 rows in set (0.00 sec)
+
+mysql> select substr(Name,2,4) from student;
++------------------+
+| substr(Name,2,4) |
++------------------+
+| ksha             |
+| eep              |
+| isha             |
+| havi             |
+| hana             |
+| rish             |
++------------------+
+6 rows in set (0.00 sec)
+
+mysql> select concat(Name,'-',Address) from student;
++--------------------------+
+| concat(Name,'-',Address) |
++--------------------------+
+| Akshay-AHMEDABAD         |
+| Deep-SURAT               |
+| Nisha-Delhi              |
+| Bhavik-Ahmedabad         |
+| Shanaya-Chandigarh       |
+| Prisha-Ahmedabad         |
++--------------------------+
+6 rows in set (0.00 sec)
+
+mysql> select replace(Name,'ana','aa') from student;
++--------------------------+
+| replace(Name,'ana','aa') |
++--------------------------+
+| Akshay                   |
+| Deep                     |
+| Nisha                    |
+| Bhavik                   |
+| Shaaya                   |
+| Prisha                   |
++--------------------------+
+6 rows in set (0.00 sec)
+
+mysql> select reverse(Name) from Student;
++---------------+
+| reverse(Name) |
++---------------+
+| yahskA        |
+| peeD          |
+| ahsiN         |
+| kivahB        |
+| ayanahS       |
+| ahsirP        |
++---------------+
+6 rows in set (0.00 sec)
+
+mysql> select reverse(Address) from Student;
++------------------+
+| reverse(Address) |
++------------------+
+| DABADEMHA        |
+| TARUS            |
+| ihleD            |
+| dabademhA        |
+| hragidnahC       |
+| dabademhA        |
++------------------+
+6 rows in set (0.00 sec)
+
+mysql> select reverse(Address)as Rev_Add ,reverse(Name)as rev_Name from emp;
++------------+----------+
+| Rev_Add    | rev_Name |
++------------+----------+
+| DABADEMHA  | yahskA   |
+| TARUS      | peeD     |
+| ihleD      | ahsiN    |
+| dabademhA  | kivahB   |
+| hragidnahC | ayanahS  |
+| dabademhA  | ahsirP   |
++------------+----------+
+6 rows in set (0.00 sec)
+
+mysql> select ascii(Name) from student;
++-------------+
+| ascii(Name) |
++-------------+
+|          65 |
+|          68 |
+|          78 |
+|          66 |
+|          83 |
+|          80 |
++-------------+
+6 rows in set (0.00 sec)
+
+mysql> select instr(Name,'a') from student;
++-----------------+
+| instr(Name,'a') |
++-----------------+
+|               1 |
+|               0 |
+|               5 |
+|               3 |
+|               3 |
+|               6 |
++-----------------+
+6 rows in set (0.01 sec)
+
+mysql> select * from student order by Name;
++------+---------+------+------------+------------+------------+--------+
+| E_Id | Name    | Age  | Address    | Join_date  | Leave_date | Salary |
++------+---------+------+------------+------------+------------+--------+
+|  101 | Akshay  |   22 | AHMEDABAD  | 2015-06-22 | 2022-08-30 |  22000 |
+|  104 | Bhavik  |   20 | Ahmedabad  | 2017-05-10 | 2022-06-23 |  21000 |
+|  102 | Deep    |   24 | SURAT      | 2017-03-12 | 2021-05-22 |  25000 |
+|  103 | Nisha   |   26 | Delhi      | 2015-04-22 | 2020-07-15 |  27000 |
+|  106 | Prisha  |   29 | Ahmedabad  | 2010-07-22 | 2021-06-12 |  30000 |
+|  105 | Shanaya |   27 | Chandigarh | 2010-06-12 | 2022-05-30 |  28000 |
++------+---------+------+------------+------------+------------+--------+
+6 rows in set (0.00 sec)
+
+mysql> select * from student order by Address desc;
++------+---------+------+------------+------------+------------+--------+
+| E_Id | Name    | Age  | Address    | Join_date  | Leave_date | Salary |
++------+---------+------+------------+------------+------------+--------+
+|  102 | Deep    |   24 | SURAT      | 2017-03-12 | 2021-05-22 |  25000 |
+|  103 | Nisha   |   26 | Delhi      | 2015-04-22 | 2020-07-15 |  27000 |
+|  105 | Shanaya |   27 | Chandigarh | 2010-06-12 | 2022-05-30 |  28000 |
+|  101 | Akshay  |   22 | AHMEDABAD  | 2015-06-22 | 2022-08-30 |  22000 |
+|  104 | Bhavik  |   20 | Ahmedabad  | 2017-05-10 | 2022-06-23 |  21000 |
+|  106 | Prisha  |   29 | Ahmedabad  | 2010-07-22 | 2021-06-12 |  30000 |
++------+---------+------+------------+------------+------------+--------+
+6 rows in set (0.00 sec)
+
+---------------------------------------------------------------------------------------------------------------------------------------------------
+
+2. => Math Function
+
+mysql> select max(Salary) from student;
++-------------+
+| max(Salary) |
++-------------+
+|       30000 |
++-------------+
+1 row in set (0.01 sec)
+
+mysql> select min(Salary) from student;
++-------------+
+| min(Salary) |
++-------------+
+|       21000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select avg(Salary) from student;
++-------------+
+| avg(Salary) |
++-------------+
+|  25500.0000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select sum(Salary) as Total_of_the_salary from student;
++---------------------+
+| Total_of_the_salary |
++---------------------+
+|              153000 |
++---------------------+
+1 row in set (0.00 sec)
+
+mysql> select max(Salary)as max_sal,min(Salary)as min_sal,avg(Salary)as avg_sal,sum(Salary) tot_sal from emp;
++---------+---------+------------+---------+
+| max_sal | min_sal | avg_sal    | tot_sal |
++---------+---------+------------+---------+
+|   30000 |   21000 | 25500.0000 |  153000 |
++---------+---------+------------+---------+
+1 row in set (0.00 sec)
+
+mysql> select mod(Age,4) from student;
++------------+
+| mod(Age,4) |
++------------+
+|          2 |
+|          0 |
+|          2 |
+|          0 |
+|          3 |
+|          1 |
++------------+
+6 rows in set (0.00 sec)
+
+mysql> select ceil(25.75);
++-------------+
+| ceil(25.75) |
++-------------+
+|          26 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select floor(25.75);
++--------------+
+| floor(25.75) |
++--------------+
+|           25 |
++--------------+
+1 row in set (0.00 sec)
+
+mysql> select round(135.258,2);
++------------------+
+| round(135.258,2) |
++------------------+
+|           135.26 |
++------------------+
+1 row in set (0.00 sec)
+
+mysql> select rand() from student;
++---------------------+
+| rand()              |
++---------------------+
+| 0.19745857566358388 |
+|  0.2584160922639222 |
+|  0.6997047650625042 |
+|  0.7232755792543996 |
+|  0.5172636318181303 |
+| 0.41649145206109756 |
++---------------------+
+6 rows in set (0.00 sec)
+
+mysql> select count(E_Id) as Record from student;
++--------+
+| Record |
++--------+
+|      6 |
++--------+
+1 row in set (0.01 sec)
+
+mysql> select pow(Salary,2) from student;
++---------------+
+| pow(Salary,2) |
++---------------+
+|     484000000 |
+|     625000000 |
+|     729000000 |
+|     441000000 |
+|     784000000 |
+|     900000000 |
++---------------+
+6 rows in set (0.00 sec)
+
+---------------------------------------------------------------------------------------------------------------------------------------------------
+
+3. => Date Function
+
+mysql> select datediff(Join_date,Leave_date) from student;
++--------------------------------+
+| datediff(Join_date,Leave_date) |
++--------------------------------+
+|                          -2626 |
+|                          -1532 |
+|                          -1911 |
+|                          -1870 |
+|                          -4370 |
+|                          -3978 |
++--------------------------------+
+6 rows in set (0.00 sec)
+
+mysql> select E_Id,Name,date_format(Join_date,"%a") from student;
++------+---------+-----------------------------+
+| E_Id | Name    | date_format(Join_date,"%a") |
++------+---------+-----------------------------+
+|  101 | Akshay  | Mon                         |
+|  102 | Deep    | Sun                         |
+|  103 | Nisha   | Wed                         |
+|  104 | Bhavik  | Wed                         |
+|  105 | Shanaya | Sat                         |
+|  106 | Prisha  | Thu                         |
++------+---------+-----------------------------+
+6 rows in set (0.02 sec)
+
+mysql> select E_Id,Name,date_format(Join_date,"%M") from student;
++------+---------+-----------------------------+
+| E_Id | Name    | date_format(Join_date,"%M") |
++------+---------+-----------------------------+
+|  101 | Akshay  | June                        |
+|  102 | Deep    | March                       |
+|  103 | Nisha   | April                       |
+|  104 | Bhavik  | May                         |
+|  105 | Shanaya | June                        |
+|  106 | Prisha  | July                        |
++------+---------+-----------------------------+
+6 rows in set (0.00 sec)
+
+mysql> select E_Id,Name,date_format(Join_date,"%b") from student;
++------+---------+-----------------------------+
+| E_Id | Name    | date_format(Join_date,"%b") |
++------+---------+-----------------------------+
+|  101 | Akshay  | Jun                         |
+|  102 | Deep    | Mar                         |
+|  103 | Nisha   | Apr                         |
+|  104 | Bhavik  | May                         |
+|  105 | Shanaya | Jun                         |
+|  106 | Prisha  | Jul                         |
++------+---------+-----------------------------+
+6 rows in set (0.00 sec)
+
+mysql> select E_Id,Name,date_format(Join_date,"%m") from student;
++------+---------+-----------------------------+
+| E_Id | Name    | date_format(Join_date,"%m") |
++------+---------+-----------------------------+
+|  101 | Akshay  | 06                          |
+|  102 | Deep    | 03                          |
+|  103 | Nisha   | 04                          |
+|  104 | Bhavik  | 05                          |
+|  105 | Shanaya | 06                          |
+|  106 | Prisha  | 07                          |
++------+---------+-----------------------------+
+6 rows in set (0.00 sec)
+
+mysql> select sysdate();
++---------------------+
+| sysdate()           |
++---------------------+
+| 2023-07-11 11:08:08 |
++---------------------+
+1 row in set (0.00 sec)
+
+mysql> select curdate();
++------------+
+| curdate()  |
++------------+
+| 2023-07-11 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select extract(month from Leave_date),extract(year from Leave_date) from student;
++--------------------------------+-------------------------------+
+| extract(month from Leave_date) | extract(year from Leave_date) |
++--------------------------------+-------------------------------+
+|                              8 |                          2022 |
+|                              5 |                          2021 |
+|                              7 |                          2020 |
+|                              6 |                          2022 |
+|                              5 |                          2022 |
+|                              6 |                          2021 |
++--------------------------------+-------------------------------+
+6 rows in set (0.00 sec)
+
+mysql> select * from student where Join_date>2010;
++------+---------+------+------------+------------+------------+--------+
+| E_Id | Name    | Age  | Address    | Join_date  | Leave_date | Salary |
++------+---------+------+------------+------------+------------+--------+
+|  101 | Akshay  |   22 | AHMEDABAD  | 2015-06-22 | 2022-08-30 |  22000 |
+|  102 | Deep    |   24 | SURAT      | 2017-03-12 | 2021-05-22 |  25000 |
+|  103 | Nisha   |   26 | Delhi      | 2015-04-22 | 2020-07-15 |  27000 |
+|  104 | Bhavik  |   20 | Ahmedabad  | 2017-05-10 | 2022-06-23 |  21000 |
+|  105 | Shanaya |   27 | Chandigarh | 2010-06-12 | 2022-05-30 |  28000 |
+|  106 | Prisha  |   29 | Ahmedabad  | 2010-07-22 | 2021-06-12 |  30000 |
++------+---------+------+------------+------------+------------+--------+
+6 rows in set, 1 warning (0.00 sec)
+
+mysql> select * from student where Join_date>2011;
++------+---------+------+------------+------------+------------+--------+
+| E_Id | Name    | Age  | Address    | Join_date  | Leave_date | Salary |
++------+---------+------+------------+------------+------------+--------+
+|  101 | Akshay  |   22 | AHMEDABAD  | 2015-06-22 | 2022-08-30 |  22000 |
+|  102 | Deep    |   24 | SURAT      | 2017-03-12 | 2021-05-22 |  25000 |
+|  103 | Nisha   |   26 | Delhi      | 2015-04-22 | 2020-07-15 |  27000 |
+|  104 | Bhavik  |   20 | Ahmedabad  | 2017-05-10 | 2022-06-23 |  21000 |
+|  105 | Shanaya |   27 | Chandigarh | 2010-06-12 | 2022-05-30 |  28000 |
+|  106 | Prisha  |   29 | Ahmedabad  | 2010-07-22 | 2021-06-12 |  30000 |
++------+---------+------+------------+------------+------------+--------+
+6 rows in set, 1 warning (0.00 sec)
+
+mysql> select * from student where Join_date>20110101;
++------+--------+------+-----------+------------+------------+--------+
+| E_Id | Name   | Age  | Address   | Join_date  | Leave_date | Salary |
++------+--------+------+-----------+------------+------------+--------+
+|  101 | Akshay |   22 | AHMEDABAD | 2015-06-22 | 2022-08-30 |  22000 |
+|  102 | Deep   |   24 | SURAT     | 2017-03-12 | 2021-05-22 |  25000 |
+|  103 | Nisha  |   26 | Delhi     | 2015-04-22 | 2020-07-15 |  27000 |
+|  104 | Bhavik |   20 | Ahmedabad | 2017-05-10 | 2022-06-23 |  21000 |
++------+--------+------+-----------+------------+------------+--------+
+4 rows in set (0.00 sec)
+
+mysql> select *,date_format(Join_date,"%M %W %Y")from student;
++------+---------+------+------------+------------+------------+--------+-----------------------------------+
+| E_Id | Name    | Age  | Address    | Join_date  | Leave_date | Salary | date_format(Join_date,"%M %W %Y") |
++------+---------+------+------------+------------+------------+--------+-----------------------------------+
+|  101 | Akshay  |   22 | AHMEDABAD  | 2015-06-22 | 2022-08-30 |  22000 | June Monday 2015                  |
+|  102 | Deep    |   24 | SURAT      | 2017-03-12 | 2021-05-22 |  25000 | March Sunday 2017                 |
+|  103 | Nisha   |   26 | Delhi      | 2015-04-22 | 2020-07-15 |  27000 | April Wednesday 2015              |
+|  104 | Bhavik  |   20 | Ahmedabad  | 2017-05-10 | 2022-06-23 |  21000 | May Wednesday 2017                |
+|  105 | Shanaya |   27 | Chandigarh | 2010-06-12 | 2022-05-30 |  28000 | June Saturday 2010                |
+|  106 | Prisha  |   29 | Ahmedabad  | 2010-07-22 | 2021-06-12 |  30000 | July Thursday 2010                |
++------+---------+------+------------+------------+------------+--------+-----------------------------------+
+6 rows in set (0.00 sec)
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Second Table.
+=>
+
+mysql> create table Students(
+    -> studentId int,
+    -> firstName varchar(10),
+    -> lastname varchar(10),
+    -> dateOfBirth date,
+    -> gender varchar(10),
+    -> email varchar(20),
+    -> phone bigint,
+    -> Address varchar(15),
+    -> PostalCode bigint,
+    -> City varchar(20));
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> desc Students;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| studentId   | int         | YES  |     | NULL    |       |
+| firstName   | varchar(10) | YES  |     | NULL    |       |
+| lastname    | varchar(10) | YES  |     | NULL    |       |
+| dateOfBirth | date        | YES  |     | NULL    |       |
+| gender      | varchar(10) | YES  |     | NULL    |       |
+| email       | varchar(20) | YES  |     | NULL    |       |
+| phone       | bigint      | YES  |     | NULL    |       |
+| Address     | varchar(15) | YES  |     | NULL    |       |
+| PostalCode  | bigint      | YES  |     | NULL    |       |
+| City        | varchar(20) | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+10 rows in set (0.01 sec)
+
+mysql> insert into Students values(1,"Meet","Solanki","2005-09-29","Male","meet@gmail.com",9879615324,"Paldi",380012,"Ahmedabad");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Students values(2,"Shubham","Thakkar","2004-09-27","Male","shubham@gmail.com",99986315324,"Vastral",382256,"Ahmedabad");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Students values(3,"Kevin","Shah","2003-05-21","Male","kevin@gmail.com",9998662683,"Sindhu Bhavan",380004,"Ahmedabad");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Students values(3,"Manish","Kanjariya","2005-07-04","Male","manish@gmail.com",1234567895,"Nehrupark",380058,"Botad");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into Students values(5,"Devansh","Ashani","2004-07-07","Male","devansh@gmail.com",1236547895,"Wadhwan",363004,"Surendranagar");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into Students values(6,"Parth","Patel","2007-11-13","Male","parth@gmail.com",1236549872,"Law Garden",384580,"Botad");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> update Students set studentId = 4 where firstName="Manish";
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> insert into Students values(7,"Tushar","Vaghela","2005-04-17","Male","tushar@gmail.com",9876549872,"Dalmil",363254,"Surendranagar");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into Students values(7,"Tushar","Vaghela","2005-04-17","Male","tushar@gmail.com",9876549872,"Dalmil",363254,"Surendranagar");
+       insert into Students values(8,"Kinjal","Rabari","1999-02-01","Female","kinjal@gmail.com",9874569872,"RTO Circle",368845,"Surat");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into Students values(9,"Heena","Patel","1987-07-04","Female","heena@gmail.com",9874567391,"Mehta Market",363002,"Surendranagar");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into Students values(10,"Sahil","Ratlani","2004-05-28","Male","sahil@gmail.com",9876547391,"Ranjitnagar",396584,"Jamnagar");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from Students;
++-----------+-----------+-----------+-------------+--------+-------------------+-------------+---------------+------------+---------------+
+| studentId | firstName | lastname  | dateOfBirth | gender | email             | phone       | Address       | PostalCode | City          |
++-----------+-----------+-----------+-------------+--------+-------------------+-------------+---------------+------------+---------------+
+|         1 | Meet      | Solanki   | 2005-09-29  | Male   | meet@gmail.com    |  9879615324 | Paldi         |     380012 | Ahmedabad     |
+|         2 | Shubham   | Thakkar   | 2004-09-27  | Male   | shubham@gmail.com | 99986315324 | Vastral       |     382256 | Ahmedabad     |
+|         3 | Kevin     | Shah      | 2003-05-21  | Male   | kevin@gmail.com   |  9998662683 | Sindhu Bhavan |     380004 | Ahmedabad     |
+|         4 | Manish    | Kanjariya | 2005-07-04  | Male   | manish@gmail.com  |  1234567895 | Nehrupark     |     380058 | Botad         |
+|         5 | Devansh   | Ashani    | 2004-07-07  | Male   | devansh@gmail.com |  1236547895 | Wadhwan       |     363004 | Surendranagar |
+|         6 | Parth     | Patel     | 2007-11-13  | Male   | parth@gmail.com   |  1236549872 | Law Garden    |     384580 | Botad         |
+|         7 | Tushar    | Vaghela   | 2005-04-17  | Male   | tushar@gmail.com  |  9876549872 | Dalmil        |     363254 | Surendranagar |
+|         8 | Kinjal    | Rabari    | 1999-02-01  | Female | kinjal@gmail.com  |  9874569872 | RTO Circle    |     368845 | Surat         |
+|         9 | Heena     | Patel     | 1987-07-04  | Female | heena@gmail.com   |  9874567391 | Mehta Market  |     363002 | Surendranagar |
+|        10 | Sahil     | Ratlani   | 2004-05-28  | Male   | sahil@gmail.com   |  9876547391 | Ranjitnagar   |     396584 | Jamnagar      |
++-----------+-----------+-----------+-------------+--------+-------------------+-------------+---------------+------------+---------------+
+10 rows in set (0.00 sec)
+
+1 => String Function.
+
+mysql> select * from Students order by firstName asc;
++-----------+-----------+-----------+-------------+--------+-------------------+-------------+---------------+------------+---------------+
+| studentId | firstName | lastname  | dateOfBirth | gender | email             | phone       | Address       | PostalCode | City          |
++-----------+-----------+-----------+-------------+--------+-------------------+-------------+---------------+------------+---------------+
+|         5 | Devansh   | Ashani    | 2004-07-07  | Male   | devansh@gmail.com |  1236547895 | Wadhwan       |     363004 | Surendranagar |
+|         9 | Heena     | Patel     | 1987-07-04  | Female | heena@gmail.com   |  9874567391 | Mehta Market  |     363002 | Surendranagar |
+|         3 | Kevin     | Shah      | 2003-05-21  | Male   | kevin@gmail.com   |  9998662683 | Sindhu Bhavan |     380004 | Ahmedabad     |
+|         8 | Kinjal    | Rabari    | 1999-02-01  | Female | kinjal@gmail.com  |  9874569872 | RTO Circle    |     368845 | Surat         |
+|         4 | Manish    | Kanjariya | 2005-07-04  | Male   | manish@gmail.com  |  1234567895 | Nehrupark     |     380058 | Botad         |
+|         1 | Meet      | Solanki   | 2005-09-29  | Male   | meet@gmail.com    |  9879615324 | Paldi         |     380012 | Ahmedabad     |
+|         6 | Parth     | Patel     | 2007-11-13  | Male   | parth@gmail.com   |  1236549872 | Law Garden    |     384580 | Botad         |
+|        10 | Sahil     | Ratlani   | 2004-05-28  | Male   | sahil@gmail.com   |  9876547391 | Ranjitnagar   |     396584 | Jamnagar      |
+|         2 | Shubham   | Thakkar   | 2004-09-27  | Male   | shubham@gmail.com | 99986315324 | Vastral       |     382256 | Ahmedabad     |
+|         7 | Tushar    | Vaghela   | 2005-04-17  | Male   | tushar@gmail.com  |  9876549872 | Dalmil        |     363254 | Surendranagar |
++-----------+-----------+-----------+-------------+--------+-------------------+-------------+---------------+------------+---------------+
+10 rows in set (0.00 sec)
+
+mysql> select * from Students order by firstName desc;
++-----------+-----------+-----------+-------------+--------+-------------------+-------------+---------------+------------+---------------+
+| studentId | firstName | lastname  | dateOfBirth | gender | email             | phone       | Address       | PostalCode | City          |
++-----------+-----------+-----------+-------------+--------+-------------------+-------------+---------------+------------+---------------+
+|         7 | Tushar    | Vaghela   | 2005-04-17  | Male   | tushar@gmail.com  |  9876549872 | Dalmil        |     363254 | Surendranagar |
+|         2 | Shubham   | Thakkar   | 2004-09-27  | Male   | shubham@gmail.com | 99986315324 | Vastral       |     382256 | Ahmedabad     |
+|        10 | Sahil     | Ratlani   | 2004-05-28  | Male   | sahil@gmail.com   |  9876547391 | Ranjitnagar   |     396584 | Jamnagar      |
+|         6 | Parth     | Patel     | 2007-11-13  | Male   | parth@gmail.com   |  1236549872 | Law Garden    |     384580 | Botad         |
+|         1 | Meet      | Solanki   | 2005-09-29  | Male   | meet@gmail.com    |  9879615324 | Paldi         |     380012 | Ahmedabad     |
+|         4 | Manish    | Kanjariya | 2005-07-04  | Male   | manish@gmail.com  |  1234567895 | Nehrupark     |     380058 | Botad         |
+|         8 | Kinjal    | Rabari    | 1999-02-01  | Female | kinjal@gmail.com  |  9874569872 | RTO Circle    |     368845 | Surat         |
+|         3 | Kevin     | Shah      | 2003-05-21  | Male   | kevin@gmail.com   |  9998662683 | Sindhu Bhavan |     380004 | Ahmedabad     |
+|         9 | Heena     | Patel     | 1987-07-04  | Female | heena@gmail.com   |  9874567391 | Mehta Market  |     363002 | Surendranagar |
+|         5 | Devansh   | Ashani    | 2004-07-07  | Male   | devansh@gmail.com |  1236547895 | Wadhwan       |     363004 | Surendranagar |
++-----------+-----------+-----------+-------------+--------+-------------------+-------------+---------------+------------+---------------+
+10 rows in set (0.00 sec)
+
+mysql> select char(97);
++--------------------+
+| char(97)           |
++--------------------+
+| 0x61               |
++--------------------+
+1 row in set (0.00 sec)
+
+mysql> select ascii(firstName)as Ascii_value from Students;
++-------------+
+| Ascii_value |
++-------------+
+|          77 |
+|          83 |
+|          75 |
+|          77 |
+|          68 |
+|          80 |
+|          84 |
+|          75 |
+|          72 |
+|          83 |
++-------------+
+10 rows in set (0.00 sec)
+
+mysql> select concat(firstName,'-',lastName,'-',Address) from Students;
++--------------------------------------------+
+| concat(firstName,'-',lastName,'-',Address) |
++--------------------------------------------+
+| Meet-Solanki-Paldi                         |
+| Shubham-Thakkar-Vastral                    |
+| Kevin-Shah-Sindhu Bhavan                   |
+| Manish-Kanjariya-Nehrupark                 |
+| Devansh-Ashani-Wadhwan                     |
+| Parth-Patel-Law Garden                     |
+| Tushar-Vaghela-Dalmil                      |
+| Kinjal-Rabari-RTO Circle                   |
+| Heena-Patel-Mehta Market                   |
+| Sahil-Ratlani-Ranjitnagar                  |
++--------------------------------------------+
+10 rows in set (0.00 sec)
+
+mysql> select substring(firstName,1,9) as LetterPosition from Students where firstName like '%I%';
++----------------+
+| LetterPosition |
++----------------+
+| Kevin          |
+| Manish         |
+| Kinjal         |
+| Sahil          |
++----------------+
+4 rows in set (0.00 sec)
+
+mysql> select instr(firstName,"I") from Students;
++----------------------+
+| instr(firstName,"I") |
++----------------------+
+|                    0 |
+|                    0 |
+|                    4 |
+|                    4 |
+|                    0 |
+|                    0 |
+|                    0 |
+|                    2 |
+|                    0 |
+|                    4 |
++----------------------+
+10 rows in set (0.01 sec)
+
+mysql> select replace(email,".com","co.in") from Students;
++-------------------------------+
+| replace(email,".com","co.in") |
++-------------------------------+
+| meet@gmailco.in               |
+| shubham@gmailco.in            |
+| kevin@gmailco.in              |
+| manish@gmailco.in             |
+| devansh@gmailco.in            |
+| parth@gmailco.in              |
+| tushar@gmailco.in             |
+| kinjal@gmailco.in             |
+| heena@gmailco.in              |
+| sahil@gmailco.in              |
++-------------------------------+
+10 rows in set (0.00 sec)
+
+mysql> select replace(Address,"Mumbai","Bombay") from Students;
++------------------------------------+
+| replace(Address,"Mumbai","Bombay") |
++------------------------------------+
+| Paldi                              |
+| Vastral                            |
+| Sindhu Bhavan                      |
+| Nehrupark                          |
+| Wadhwan                            |
+| Law Garden                         |
+| Dalmil                             |
+| RTO Circle                         |
+| Mehta Market                       |
+| Ranjitnagar                        |
++------------------------------------+
+10 rows in set (0.00 sec)
+
+mysql> select reverse(lastName)as reverse from Students;
++-----------+
+| reverse   |
++-----------+
+| iknaloS   |
+| rakkahT   |
+| hahS      |
+| ayirajnaK |
+| inahsA    |
+| letaP     |
+| alehgaV   |
+| irabaR    |
+| letaP     |
+| inaltaR   |
++-----------+
+10 rows in set (0.00 sec)
+
+mysql> select ucase(firstName) as Upper from Students;
++---------+
+| Upper   |
++---------+
+| MEET    |
+| SHUBHAM |
+| KEVIN   |
+| MANISH  |
+| DEVANSH |
+| PARTH   |
+| TUSHAR  |
+| KINJAL  |
+| HEENA   |
+| SAHIL   |
++---------+
+10 rows in set (0.00 sec)
+
+mysql> select lcase(email) as Lower from Students;
++-------------------+
+| Lower             |
++-------------------+
+| meet@gmail.com    |
+| shubham@gmail.com |
+| kevin@gmail.com   |
+| manish@gmail.com  |
+| devansh@gmail.com |
+| parth@gmail.com   |
+| tushar@gmail.com  |
+| kinjal@gmail.com  |
+| heena@gmail.com   |
+| sahil@gmail.com   |
++-------------------+
+10 rows in set (0.00 sec)
+
+mysql> select length(firstName) from Students;
++-------------------+
+| length(firstName) |
++-------------------+
+|                 4 |
+|                 7 |
+|                 5 |
+|                 6 |
+|                 7 |
+|                 5 |
+|                 6 |
+|                 6 |
+|                 5 |
+|                 5 |
++-------------------+
+10 rows in set (0.00 sec)
+
+mysql> select repeat(Address,3) from Students;
++-----------------------------------------+
+| repeat(Address,3)                       |
++-----------------------------------------+
+| PaldiPaldiPaldi                         |
+| VastralVastralVastral                   |
+| Sindhu BhavanSindhu BhavanSindhu Bhavan |
+| NehruparkNehruparkNehrupark             |
+| WadhwanWadhwanWadhwan                   |
+| Law GardenLaw GardenLaw Garden          |
+| DalmilDalmilDalmil                      |
+| RTO CircleRTO CircleRTO Circle          |
+| Mehta MarketMehta MarketMehta Market    |
+| RanjitnagarRanjitnagarRanjitnagar       |
++-----------------------------------------+
+10 rows in set (0.00 sec)
+
+mysql> select substr(firstName,2,5) from Students;
++-----------------------+
+| substr(firstName,2,5) |
++-----------------------+
+| eet                   |
+| hubha                 |
+| evin                  |
+| anish                 |
+| evans                 |
+| arth                  |
+| ushar                 |
+| injal                 |
+| eena                  |
+| ahil                  |
++-----------------------+
+10 rows in set (0.00 sec)
+
+mysql> select left(firstName,5) from Students;
++-------------------+
+| left(firstName,5) |
++-------------------+
+| Meet              |
+| Shubh             |
+| Kevin             |
+| Manis             |
+| Devan             |
+| Parth             |
+| Tusha             |
+| Kinja             |
+| Heena             |
+| Sahil             |
++-------------------+
+10 rows in set (0.00 sec)
+
+mysql> select right(firstName,5) from Students;
++--------------------+
+| right(firstName,5) |
++--------------------+
+| Meet               |
+| ubham              |
+| Kevin              |
+| anish              |
+| vansh              |
+| Parth              |
+| ushar              |
+| injal              |
+| Heena              |
+| Sahil              |
++--------------------+
+10 rows in set (0.00 sec)
+
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+2. => Math Function.
+
+mysql> select avg(studentId) as Average from Students where studentId=1;
++---------+
+| Average |
++---------+
+|  1.0000 |
++---------+
+1 row in set (0.01 sec)
+
+mysql> select sum(studentId) as Sum from Students where studentId=3;
++------+
+| Sum  |
++------+
+|    3 |
++------+
+1 row in set (0.00 sec)
+
+mysql> select count(studentId) as Count from Students where studentId=2;
++-------+
+| Count |
++-------+
+|     1 |
++-------+
+1 row in set (0.00 sec)
+
+mysql> select ceil(studentId) as Round_up from Students where studentId=2;
++----------+
+| Round_up |
++----------+
+|        2 |
++----------+
+1 row in set (0.01 sec)
+
+mysql> select floor(studentId) as Round_down from students where studentId=3;
++------------+
+| Round_down |
++------------+
+|          3 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select max(dateOfBirth) as Max from Students where studentId=1;
++------------+
+| Max        |
++------------+
+| 2005-09-29 |
++------------+
+1 row in set (0.01 sec)
+
+mysql> select min(dateOfBirth) as Min from Students where studentId=1;
++------------+
+| Min        |
++------------+
+| 2005-09-29 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select mod(studentId,2) from Students;
++------------------+
+| mod(studentId,2) |
++------------------+
+|                1 |
+|                0 |
+|                1 |
+|                0 |
+|                1 |
+|                0 |
+|                1 |
+|                0 |
+|                1 |
+|                0 |
++------------------+
+10 rows in set (0.00 sec)
+
+mysql> select pow(studentId,2) from Students;
++------------------+
+| pow(studentId,2) |
++------------------+
+|                1 |
+|                4 |
+|                9 |
+|               16 |
+|               25 |
+|               36 |
+|               49 |
+|               64 |
+|               81 |
+|              100 |
++------------------+
+10 rows in set (0.01 sec)
+
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+3. => Date Function.
+
+mysql> select date_format(dateOfBirth,"%y,%m,%d") from Students;
++-------------------------------------+
+| date_format(dateOfBirth,"%y,%m,%d") |
++-------------------------------------+
+| 05,09,29                            |
+| 04,09,27                            |
+| 03,05,21                            |
+| 05,07,04                            |
+| 04,07,07                            |
+| 07,11,13                            |
+| 05,04,17                            |
+| 99,02,01                            |
+| 87,07,04                            |
+| 04,05,28                            |
++-------------------------------------+
+10 rows in set (0.01 sec)
+
+mysql> select sysdate();
++---------------------+
+| sysdate()           |
++---------------------+
+| 2023-07-17 22:53:27 |
++---------------------+
+1 row in set (0.00 sec)
+
+mysql> select firstName,year(curdate())-year(dateOfBirth)as Age from Students;
++-----------+------+
+| firstName | Age  |
++-----------+------+
+| Meet      |   18 |
+| Shubham   |   19 |
+| Kevin     |   20 |
+| Manish    |   18 |
+| Devansh   |   19 |
+| Parth     |   16 |
+| Tushar    |   18 |
+| Kinjal    |   24 |
+| Heena     |   36 |
+| Sahil     |   19 |
++-----------+------+
+10 rows in set (0.01 sec)
+
+mysql> select char(97);
++--------------------+
+| char(97)           |
++--------------------+
+| 0x61               |
++--------------------+
+1 row in set (0.01 sec)
+
+mysql> select round(333.44567,3);
++--------------------+
+| round(333.44567,3) |
++--------------------+
+|            333.446 |
++--------------------+
+1 row in set (0.00 sec)
+
+mysql> select greatest(3456,6789,9876,5432) as Greatest;
++----------+
+| Greatest |
++----------+
+|     9876 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select least(3456,6789,9876,5432) as Least;
++-------+
+| Least |
++-------+
+|  3456 |
++-------+
+1 row in set (0.00 sec)
+
+mysql> select sin(4.7) as Sine,cos(4.7) as Cos;
++---------------------+----------------------+
+| Sine                | Cos                  |
++---------------------+----------------------+
+| -0.9999232575641008 | -0.01238866346289056 |
++---------------------+----------------------+
+1 row in set (0.00 sec)
+
+mysql> select pi();
++----------+
+| pi()     |
++----------+
+| 3.141593 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select adddate(sysdate(),interval 15 minute);
++---------------------------------------+
+| adddate(sysdate(),interval 15 minute) |
++---------------------------------------+
+| 2023-07-17 23:25:11                   |
++---------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select adddate(dateOfBirth,interval 15 day) from Students;
++--------------------------------------+
+| adddate(dateOfBirth,interval 15 day) |
++--------------------------------------+
+| 2005-10-14                           |
+| 2004-10-12                           |
+| 2003-06-05                           |
+| 2005-07-19                           |
+| 2004-07-22                           |
+| 2007-11-28                           |
+| 2005-05-02                           |
+| 1999-02-16                           |
+| 1987-07-19                           |
+| 2004-06-12                           |
++--------------------------------------+
+10 rows in set (0.00 sec)
+
+mysql> select datediff("2017-01-01","2016-12-24");
++-------------------------------------+
+| datediff("2017-01-01","2016-12-24") |
++-------------------------------------+
+|                                   8 |
++-------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select dayofmonth("2017-06-15");
++--------------------------+
+| dayofmonth("2017-06-15") |
++--------------------------+
+|                       15 |
++--------------------------+
+1 row in set (0.00 sec)
+
+mysql> select dayofmonth(curdate());
++-----------------------+
+| dayofmonth(curdate()) |
++-----------------------+
+|                    17 |
++-----------------------+
+1 row in set (0.00 sec)
+
+mysql> select dayofyear(curdate());
++----------------------+
+| dayofyear(curdate()) |
++----------------------+
+|                  198 |
++----------------------+
+1 row in set (0.00 sec)
+
+mysql> select date_format("2017-06-15","%W") as Day;
++----------+
+| Day      |
++----------+
+| Thursday |
++----------+
+1 row in set (0.00 sec)
+
+------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -1,0 +1,325 @@
+mysql> select * from yash;
++--------+----------+----------+-----------+------------------+
+| stu_id | stu_name | stu_roll | stu_city  | stu_mobilenumber |
++--------+----------+----------+-----------+------------------+
+|      1 | yash     |        5 | kalana    |       9106236281 |
+|      2 | kunj     |       10 | khadiya   |       9106536281 |
+|      3 | dhaval   |       20 | rajkot    |       9106576281 |
+|      4 | dhruvi   |       28 | junagadh  |       9106576271 |
+|      5 | janvi    |       50 | ravni     |       9106576261 |
+|      6 | shreya   |       40 | gondal    |       9106576240 |
+|      7 | raj      |        4 | surat     |       9106576140 |
+|      8 | happy    |        9 | dhoraji   |       9106576130 |
+|      9 | jash     |        8 | upleta    |       9102576130 |
+|     10 | dev      |       70 | ahemdabad |       9102576137 |
++--------+----------+----------+-----------+------------------+
+10 rows in set (0.00 sec)
+
+mysql> select ascii('yash')from yash;
++---------------+
+| ascii('yash') |
++---------------+
+|           121 |
+|           121 |
+|           121 |
+|           121 |
+|           121 |
+|           121 |
+|           121 |
+|           121 |
+|           121 |
+|           121 |
++---------------+
+10 rows in set (0.00 sec)
+
+mysql> select ascii('y')from yash;
++------------+
+| ascii('y') |
++------------+
+|        121 |
+|        121 |
+|        121 |
+|        121 |
+|        121 |
+|        121 |
+|        121 |
+|        121 |
+|        121 |
+|        121 |
++------------+
+10 rows in set (0.00 sec)
+
+mysql> select char('10')from yash;
++------------------------+
+| char('10')             |
++------------------------+
+| 0x0A                   |
+| 0x0A                   |
+| 0x0A                   |
+| 0x0A                   |
+| 0x0A                   |
+| 0x0A                   |
+| 0x0A                   |
+| 0x0A                   |
+| 0x0A                   |
+| 0x0A                   |
++------------------------+
+10 rows in set (0.00 sec)
+
+mysql> select ascii('10')from yash;
++-------------+
+| ascii('10') |
++-------------+
+|          49 |
+|          49 |
+|          49 |
+|          49 |
+|          49 |
+|          49 |
+|          49 |
+|          49 |
+|          49 |
+|          49 |
++-------------+
+10 rows in set (0.00 sec)
+
+mysql> select replace(stu_city,'a','b')from yash;
++---------------------------+
+| replace(stu_city,'a','b') |
++---------------------------+
+| kblbnb                    |
+| khbdiyb                   |
+| rbjkot                    |
+| junbgbdh                  |
+| rbvni                     |
+| gondbl                    |
+| surbt                     |
+| dhorbji                   |
+| upletb                    |
+| bhemdbbbd                 |
++---------------------------+
+10 rows in set (0.00 sec)
+
+mysql> select replace(stu_city,'kalana','b')from yash;
++--------------------------------+
+| replace(stu_city,'kalana','b') |
++--------------------------------+
+| b                              |
+| khadiya                        |
+| rajkot                         |
+| junagadh                       |
+| ravni                          |
+| gondal                         |
+| surat                          |
+| dhoraji                        |
+| upleta                         |
+| ahemdabad                      |
++--------------------------------+
+10 rows in set (0.00 sec)
+
+mysql> select reverse(stu_city)from yash;
++-------------------+
+| reverse(stu_city) |
++-------------------+
+| analak            |
+| ayidahk           |
+| tokjar            |
+| hdaganuj          |
+| invar             |
+| ladnog            |
+| tarus             |
+| ijarohd           |
+| atelpu            |
+| dabadmeha         |
++-------------------+
+10 rows in set (0.00 sec)
+
+mysql> select ucase(stu_city)from yash;
++-----------------+
+| ucase(stu_city) |
++-----------------+
+| KALANA          |
+| KHADIYA         |
+| RAJKOT          |
+| JUNAGADH        |
+| RAVNI           |
+| GONDAL          |
+| SURAT           |
+| DHORAJI         |
+| UPLETA          |
+| AHEMDABAD       |
++-----------------+
+10 rows in set (0.00 sec)
+
+mysql> select ucase(stu_name)from yash;
++-----------------+
+| ucase(stu_name) |
++-----------------+
+| YASH            |
+| KUNJ            |
+| DHAVAL          |
+| DHRUVI          |
+| JANVI           |
+| SHREYA          |
+| RAJ             |
+| HAPPY           |
+| JASH            |
+| DEV             |
++-----------------+
+10 rows in set (0.00 sec)
+
+mysql> select repeat(stu_name,2)from yash;
++--------------------+
+| repeat(stu_name,2) |
++--------------------+
+| yashyash           |
+| kunjkunj           |
+| dhavaldhaval       |
+| dhruvidhruvi       |
+| janvijanvi         |
+| shreyashreya       |
+| rajraj             |
+| happyhappy         |
+| jashjash           |
+| devdev             |
++--------------------+
+10 rows in set (0.00 sec)
+
+mysql> select repeat(stu_name,10)from yash;
++--------------------------------------------------------------+
+| repeat(stu_name,10)                                          |
++--------------------------------------------------------------+
+| yashyashyashyashyashyashyashyashyashyash                     |
+| kunjkunjkunjkunjkunjkunjkunjkunjkunjkunj                     |
+| dhavaldhavaldhavaldhavaldhavaldhavaldhavaldhavaldhavaldhaval |
+| dhruvidhruvidhruvidhruvidhruvidhruvidhruvidhruvidhruvidhruvi |
+| janvijanvijanvijanvijanvijanvijanvijanvijanvijanvi           |
+| shreyashreyashreyashreyashreyashreyashreyashreyashreyashreya |
+| rajrajrajrajrajrajrajrajrajraj                               |
+| happyhappyhappyhappyhappyhappyhappyhappyhappyhappy           |
+| jashjashjashjashjashjashjashjashjashjash                     |
+| devdevdevdevdevdevdevdevdevdev                               |
++--------------------------------------------------------------+
+10 rows in set (0.00 sec)
+
+mysql> select right(stu_name,4)from yash;
++-------------------+
+| right(stu_name,4) |
++-------------------+
+| yash              |
+| kunj              |
+| aval              |
+| ruvi              |
+| anvi              |
+| reya              |
+| raj               |
+| appy              |
+| jash              |
+| dev               |
++-------------------+
+10 rows in set (0.00 sec)
+
+mysql> select right(stu_name,2)from yash;
++-------------------+
+| right(stu_name,2) |
++-------------------+
+| sh                |
+| nj                |
+| al                |
+| vi                |
+| vi                |
+| ya                |
+| aj                |
+| py                |
+| sh                |
+| ev                |
++-------------------+
+10 rows in set (0.00 sec)
+
+mysql> select left(stu_name,2)from yash;
++------------------+
+| left(stu_name,2) |
++------------------+
+| ya               |
+| ku               |
+| dh               |
+| dh               |
+| ja               |
+| sh               |
+| ra               |
+| ha               |
+| ja               |
+| de               |
++------------------+
+10 rows in set (0.00 sec)
+
+mysql> select left(stu_name,10)from yash;
++-------------------+
+| left(stu_name,10) |
++-------------------+
+| yash              |
+| kunj              |
+| dhaval            |
+| dhruvi            |
+| janvi             |
+| shreya            |
+| raj               |
+| happy             |
+| jash              |
+| dev               |
++-------------------+
+10 rows in set (0.00 sec)
+
+mysql> select concat_ws("-",stu_name,stu_city,stu_mobilenumber)from yash;
++---------------------------------------------------+
+| concat_ws("-",stu_name,stu_city,stu_mobilenumber) |
++---------------------------------------------------+
+| yash-kalana-9106236281                            |
+| kunj-khadiya-9106536281                           |
+| dhaval-rajkot-9106576281                          |
+| dhruvi-junagadh-9106576271                        |
+| janvi-ravni-9106576261                            |
+| shreya-gondal-9106576240                          |
+| raj-surat-9106576140                              |
+| happy-dhoraji-9106576130                          |
+| jash-upleta-9102576130                            |
+| dev-ahemdabad-9102576137                          |
++---------------------------------------------------+
+10 rows in set (0.00 sec)
+
+mysql> select concat_ws("*",stu_name,stu_city,stu_mobilenumber)from yash;
++---------------------------------------------------+
+| concat_ws("*",stu_name,stu_city,stu_mobilenumber) |
++---------------------------------------------------+
+| yash*kalana*9106236281                            |
+| kunj*khadiya*9106536281                           |
+| dhaval*rajkot*9106576281                          |
+| dhruvi*junagadh*9106576271                        |
+| janvi*ravni*9106576261                            |
+| shreya*gondal*9106576240                          |
+| raj*surat*9106576140                              |
+| happy*dhoraji*9106576130                          |
+| jash*upleta*9102576130                            |
+| dev*ahemdabad*9102576137                          |
++---------------------------------------------------+
+10 rows in set (0.00 sec)
+
+mysql> select concat(stu_name,"+",stu_roll,"+",stu_city)from yash;
++--------------------------------------------+
+| concat(stu_name,"+",stu_roll,"+",stu_city) |
++--------------------------------------------+
+| yash+5+kalana                              |
+| kunj+10+khadiya                            |
+| dhaval+20+rajkot                           |
+| dhruvi+28+junagadh                         |
+| janvi+50+ravni                             |
+| shreya+40+gondal                           |
+| raj+4+surat                                |
+| happy+9+dhoraji                            |
+| jash+8+upleta                              |
+| dev+70+ahemdabad                           |
++--------------------------------------------+
+10 rows in set (0.00 sec)
+
+mysql> 
+

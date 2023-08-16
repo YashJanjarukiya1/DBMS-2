@@ -1,0 +1,122 @@
+Database changed
+mysql> select * from yash;
++--------+----------+----------+-----------+------------------+
+| stu_id | stu_name | stu_roll | stu_city  | stu_mobilenumber |
++--------+----------+----------+-----------+------------------+
+|      1 | yash     |        5 | kalana    |       9106236281 |
+|      2 | kunj     |       10 | khadiya   |       9106536281 |
+|      3 | dhaval   |       20 | rajkot    |       9106576281 |
+|      4 | dhruvi   |       28 | junagadh  |       9106576271 |
+|      5 | janvi    |       50 | ravni     |       9106576261 |
+|      6 | shreya   |       40 | gondal    |       9106576240 |
+|      7 | raj      |        4 | surat     |       9106576140 |
+|      8 | happy    |        9 | dhoraji   |       9106576130 |
+|      9 | jash     |        8 | upleta    |       9102576130 |
+|     10 | dev      |       70 | ahemdabad |       9102576137 |
++--------+----------+----------+-----------+------------------+
+10 rows in set (0.01 sec)
+
+mysql> select instr(stu_name,'b')from yash;
++---------------------+
+| instr(stu_name,'b') |
++---------------------+
+|                   0 |
+|                   0 |
+|                   0 |
+|                   0 |
+|                   0 |
+|                   0 |
+|                   0 |
+|                   0 |
+|                   0 |
+|                   0 |
++---------------------+
+10 rows in set (0.00 sec)
+
+mysql> select instr(stu_city,'b')from yash;
++---------------------+
+| instr(stu_city,'b') |
++---------------------+
+|                   0 |
+|                   0 |
+|                   0 |
+|                   0 |
+|                   0 |
+|                   0 |
+|                   0 |
+|                   0 |
+|                   0 |
+|                   7 |
++---------------------+
+10 rows in set (0.00 sec)
+
+mysql> select length(stu_city)from yash;
++------------------+
+| length(stu_city) |
++------------------+
+|                6 |
+|                7 |
+|                6 |
+|                8 |
+|                5 |
+|                6 |
+|                5 |
+|                7 |
+|                6 |
+|                9 |
++------------------+
+10 rows in set (0.00 sec)
+
+mysql> select substr(stu_city,2,4)from yash;
++----------------------+
+| substr(stu_city,2,4) |
++----------------------+
+| alan                 |
+| hadi                 |
+| ajko                 |
+| unag                 |
+| avni                 |
+| onda                 |
+| urat                 |
+| hora                 |
+| plet                 |
+| hemd                 |
++----------------------+
+10 rows in set (0.00 sec)
+
+mysql> select insert(stu_city,2,4,'aa')from yash;
++---------------------------+
+| insert(stu_city,2,4,'aa') |
++---------------------------+
+| kaaa                      |
+| kaaya                     |
+| raat                      |
+| jaaadh                    |
+| raa                       |
+| gaal                      |
+| saa                       |
+| daaji                     |
+| uaaa                      |
+| aaaabad                   |
++---------------------------+
+10 rows in set (0.01 sec)
+
+mysql> select * from yash;
++--------+----------+----------+-----------+------------------+
+| stu_id | stu_name | stu_roll | stu_city  | stu_mobilenumber |
++--------+----------+----------+-----------+------------------+
+|      1 | yash     |        5 | kalana    |       9106236281 |
+|      2 | kunj     |       10 | khadiya   |       9106536281 |
+|      3 | dhaval   |       20 | rajkot    |       9106576281 |
+|      4 | dhruvi   |       28 | junagadh  |       9106576271 |
+|      5 | janvi    |       50 | ravni     |       9106576261 |
+|      6 | shreya   |       40 | gondal    |       9106576240 |
+|      7 | raj      |        4 | surat     |       9106576140 |
+|      8 | happy    |        9 | dhoraji   |       9106576130 |
+|      9 | jash     |        8 | upleta    |       9102576130 |
+|     10 | dev      |       70 | ahemdabad |       9102576137 |
++--------+----------+----------+-----------+------------------+
+10 rows in set (0.00 sec)
+
+mysql> 
+

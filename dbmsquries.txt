@@ -1,0 +1,157 @@
+mysql> select * from hospital;
++------+-------------+-----------+--------------+--------+----------------+
+| h_id | h_name      | h_city    | doctor_name  | h_time | h_mobilenumber |
++------+-------------+-----------+--------------+--------+----------------+
+|    1 | kayakalp    | junagadh  | dr_yash      |     10 |     9106236287 |
+|    2 | sankalp     | upleta    | dr_subhas    |      9 |     9106236787 |
+|    3 | birla       | udaipur   | dr_abhimanyu |      7 |     9106236747 |
+|    4 | sanket      | dhoraji   | dr_raj       |     10 |     9107236747 |
+|    5 | subhlakshmi | rajkot    | dr_chintan   |      6 |     9102236747 |
+|    6 | kj          | surat     | dr_kashyap   |     11 |     9102286747 |
+|    7 | lakshmi     | jaypur    | dr_chirag    |      7 |     9802286747 |
+|    8 | civil       | ahemdabad | dr_vijay     |      8 |     9802236747 |
+|    9 | kokila      | bombay    | dr_harit     |      9 |     9802236747 |
+|   10 |             | bombay    | dr_harit     |      9 |     9802236747 |
++------+-------------+-----------+--------------+--------+----------------+
+10 rows in set (0.00 sec)
+
+mysql> select avg(price)from hospital;
+ERROR 1054 (42S22): Unknown column 'price' in 'field list'
+mysql> select avg(price)from hospital
+    -> ;
+ERROR 1054 (42S22): Unknown column 'price' in 'field list'
+mysql> select avg(h_time)from hospital
+    -> select avg(h_time)from hospital;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'select avg(h_time)from hospital' at line 2
+mysql> select avg(h_time)from hospital;
++-------------+
+| avg(h_time) |
++-------------+
+|      8.6000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select cell(25,75)from hospital;
+ERROR 1305 (42000): FUNCTION mysql.cell does not exist
+mysql> select cell(25,75);
+ERROR 1305 (42000): FUNCTION mysql.cell does not exist
+mysql> select ceil(25,75);
+ERROR 1582 (42000): Incorrect parameter count in the call to native function 'ceil'
+mysql> select cell(25,75);
+ERROR 1305 (42000): FUNCTION mysql.cell does not exist
+mysql> select count(h_time)from hospital;
++---------------+
+| count(h_time) |
++---------------+
+|            10 |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> select floor(26.75);
++--------------+
+| floor(26.75) |
++--------------+
+|           26 |
++--------------+
+1 row in set (0.00 sec)
+
+mysql> select mod(10,4);
++-----------+
+| mod(10,4) |
++-----------+
+|         2 |
++-----------+
+1 row in set (0.01 sec)
+
+mysql> select pow(10,4);
++-----------+
+| pow(10,4) |
++-----------+
+|     10000 |
++-----------+
+1 row in set (0.01 sec)
+
+mysql> select round(135.258,2);
++------------------+
+| round(135.258,2) |
++------------------+
+|           135.26 |
++------------------+
+1 row in set (0.00 sec)
+
+mysql> select sqrt(5);
++------------------+
+| sqrt(5)          |
++------------------+
+| 2.23606797749979 |
++------------------+
+1 row in set (0.01 sec)
+
+mysql> select sum(h_time)from hospital;
++-------------+
+| sum(h_time) |
++-------------+
+|          86 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select greatest(3,12,8,25);
++---------------------+
+| greatest(3,12,8,25) |
++---------------------+
+|                  25 |
++---------------------+
+1 row in set (0.01 sec)
+
+mysql> select pi();
++----------+
+| pi()     |
++----------+
+| 3.141593 |
++----------+
+1 row in set (0.01 sec)
+
+mysql> select cos(2);
++---------------------+
+| cos(2)              |
++---------------------+
+| -0.4161468365471424 |
++---------------------+
+1 row in set (0.00 sec)
+
+mysql> select sin(2);
++--------------------+
+| sin(2)             |
++--------------------+
+| 0.9092974268256817 |
++--------------------+
+1 row in set (0.00 sec)
+
+mysql> select max(h_time)as largest h_time from hospital;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'h_time from hospital' at line 1
+mysql> select max(h_time)from hospital;
++-------------+
+| max(h_time) |
++-------------+
+|          11 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select min(h_time)from hospital;
++-------------+
+| min(h_time) |
++-------------+
+|           6 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select least(3,12,34,8,25);
++---------------------+
+| least(3,12,34,8,25) |
++---------------------+
+|                   3 |
++---------------------+
+1 row in set (0.00 sec)
+
+mysql> 
+
