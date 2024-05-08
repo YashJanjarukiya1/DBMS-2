@@ -1,0 +1,510 @@
+Name : Parmar Darshan K.
+Div : AS
+Roll : AS44
+___________________________________________________________________________
+
+
+->  Movie Table :
+
+mysql> create table Movie(M_id int,M_name varchar(20),M_details json,Singer json,Actor varchar(15),Actress varchar(16));
+Query OK, 0 rows affected (0.07 sec)
+
+________________________________________________________________________________________
+
+Query - 1 : Insert atleast 8 rows.
+________________________________________________________________________________________
+
+mysql> insert into Movie values(1,"Gadar2",'{ "type" : "Commercial", "Release_date" : "2023.09.23" , "Zoner" : "Action" , "No_of_songs" : "6" }' , '{ "male_singer" : "Arijit" , "female_singer" : "shreya
+ghosal" }',"Sunny Deol","Ameesha Patel");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Movie values(2,"Rockey aur Rani",'{ "type" : "Documentry", "Release_date" : "2022.02.19" , "Zoner" : "Thriller" , "No_of_songs" : "4"
+ }' , '{ "male_singer" : "Arijit" , "female_singer" : "Neha Kakkar" }',"Ranveer singh","Alia Bhatt");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Movie values(3,"Dear Zindagi",'{ "type" : "Animation", "Release_date" : "2012.11.03" , "Zoner" : "Comedy" , "No_of_songs" : 0 }' , '{
+ "male_singer" : "Darshan Rawal" , "female_singer" : "Dhwani" }',"Shah Rukh","Alia Bhatt");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Movie values(4,"Ram Leela",'{ "type" : "Documentry", "Release_date" : "2013.08.21" , "Zoner" : "Action" , "No_of_songs" : 4 }' , '{ "male_singer" : "Armaan Malik" , "female_singer" : "Monali Thakur" }',"Ranveer Singh","Deepika padukone");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Movie values(5,"Shershah",'{ "type" : "Commercial", "Release_date" : "2021.06.04" , "Zoner" : "Thriller" , "No_of_songs" : 3 }' , '{
+"male_singer" : "Arijit" , "female_singer" : "Dhwani" }',"Siddharth","Kiara Advani");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Movie values(6,"Bahubali",'{ "type" : "Animation", "Release_date" : "2015.05.20" , "Zoner" : "Action" , "No_of_songs" : 6 }' , '{ "male_singer" : "Darshan Rawal" , "female_singer" : "Neha Kakkar" }',"Prabhas","Tamanna Bhatia");
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into Movie values(7,"Andaaz",'{ "type" : "Commercial", "Release_date" : "2002.03.10" , "Zoner" : "Comedy" , "No_of_songs" : 5 }' , '{ "male_singer" : "Kumar Sanu" , "female_singer" : "Alka Yagnik" }',"Akshay Kumar","Priyanka Chopra");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Movie values(8,"Bhaijaan",'{ "type" : "Documentry", "Release_date" : "2023.07.29" , "Zoner" : "Comedy" , "No_of_songs" : 0 }' , '{ "male_singer" : "Arijit" , "female_singer" : "shreya ghosal" }',"Salman Khan","Pooja");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from Movie;
++------+-----------------+-----------------------------------------------------------------------------------------------+-------------------------------------------------------------------+---------------+------------------+
+| M_id | M_name          | M_details                                                                                     | Singer                                                            | Actor         | Actress          |
++------+-----------------+-----------------------------------------------------------------------------------------------+-------------------------------------------------------------------+---------------+------------------+
+|    1 | Gadar2          | {"type": "Commercial", "Zoner": "Action", "No_of_songs": "6", "Release_date": "2023.09.23"}   | {"male_singer": "Arijit", "female_singer": "shreya ghosal"}       | Sunny Deol    | Ameesha Patel    |
+|    2 | Rockey aur Rani | {"type": "Documentry", "Zoner": "Thriller", "No_of_songs": "4", "Release_date": "2022.02.19"} | {"male_singer": "Arijit", "female_singer": "Neha Kakkar"}         | Ranveer singh | Alia Bhatt       |
+|    3 | Dear Zindagi    | {"type": "Animation", "Zoner": "Comedy", "No_of_songs": 0, "Release_date": "2012.11.03"}      | {"male_singer": "Darshan Rawal", "female_singer": "Dhwani"}       | Shah Rukh     | Alia Bhatt       |
+|    4 | Ram Leela       | {"type": "Documentry", "Zoner": "Action", "No_of_songs": 4, "Release_date": "2013.08.21"}     | {"male_singer": "Armaan Malik", "female_singer": "Monali Thakur"} | Ranveer Singh | Deepika padukone |
+|    5 | Shershah        | {"type": "Commercial", "Zoner": "Thriller", "No_of_songs": 3, "Release_date": "2021.06.04"}   | {"male_singer": "Arijit", "female_singer": "Dhwani"}              | Siddharth     | Kiara Advani     |
+|    6 | Bahubali        | {"type": "Animation", "Zoner": "Action", "No_of_songs": 6, "Release_date": "2015.05.20"}      | {"male_singer": "Darshan Rawal", "female_singer": "Neha Kakkar"}  | Prabhas       | Tamanna Bhatia   |
+|    7 | Andaaz          | {"type": "Commercial", "Zoner": "Comedy", "No_of_songs": 5, "Release_date": "2002.03.10"}     | {"male_singer": "Kumar Sanu", "female_singer": "Alka Yagnik"}     | Akshay Kumar  | Priyanka Chopra  |
+|    8 | Bhaijaan        | {"type": "Documentry", "Zoner": "Comedy", "No_of_songs": 0, "Release_date": "2023.07.29"}     | {"male_singer": "Arijit", "female_singer": "shreya ghosal"}       | Salman Khan   | Pooja            |
++------+-----------------+-----------------------------------------------------------------------------------------------+-------------------------------------------------------------------+---------------+------------------+
+8 rows in set (0.00 sec)
+
+________________________________________________________________________________________
+
+Query - 2 : Display Movie name and 'Gadar2' realese date.
+________________________________________________________________________________________
+
+mysql> select M_name,M_details ->> '$.Release_date' as Release_Date from Movie where M_name = "Gadar2";
++--------+--------------+
+| M_name | Release_Date |
++--------+--------------+
+| Gadar2 | 2023.09.23   |
++--------+--------------+
+1 row in set (0.01 sec)
+
+________________________________________________________________________________________
+
+Query - 3 : Display Movie name and zoner of the movie whose actor is ‘salman khan’.
+________________________________________________________________________________________
+
+mysql> select M_name,M_details ->> '$.Zoner' as Zoner from Movie where Actor = "Salman Khan";
++----------+--------+
+| M_name   | Zoner  |
++----------+--------+
+| Bhaijaan | Comedy |
++----------+--------+
+1 row in set (0.00 sec)
+
+________________________________________________________________________________________
+
+Query - 4 : Display Movie_id , movie_name and male_singer_name using extract function.
+________________________________________________________________________________________
+
+
+mysql> select M_id,M_name, json_extract(Singer,'$.male_singer') as MaleSinger from Movie;
++------+-----------------+-----------------+
+| M_id | M_name          | MaleSinger      |
++------+-----------------+-----------------+
+|    1 | Gadar2          | "Arijit"        |
+|    2 | Rockey aur Rani | "Arijit"        |
+|    3 | Dear Zindagi    | "Darshan Rawal" |
+|    4 | Ram Leela       | "Armaan Malik"  |
+|    5 | Shershah        | "Arijit"        |
+|    6 | Bahubali        | "Darshan Rawal" |
+|    7 | Andaaz          | "Kumar Sanu"    |
+|    8 | Bhaijaan        | "Arijit"        |
++------+-----------------+-----------------+
+8 rows in set (0.00 sec)
+
+________________________________________________________________________________________
+
+Query - 5 : Display Movie name with no.of songs.
+________________________________________________________________________________________
+
+mysql> select M_name,M_details ->> '$.No_of_songs' as No_of_Songs from Movie;
++-----------------+-------------+
+| M_name          | No_of_Songs |
++-----------------+-------------+
+| Gadar2          | 6           |
+| Rockey aur Rani | 4           |
+| Dear Zindagi    | 0           |
+| Ram Leela       | 4           |
+| Shershah        | 3           |
+| Bahubali        | 6           |
+| Andaaz          | 5           |
+| Bhaijaan        | 0           |
++-----------------+-------------+
+8 rows in set (0.00 sec)
+________________________________________________________________________________________
+
+Query - 6 : Add producer name in movie details whose movie name strarts with ‘k’.
+________________________________________________________________________________________
+
+mysql> update Movie set M_details = json_insert(M_details,'$.Producer_name','Krishna Aacharya') where M_id = 3;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from Movie;
++------+-----------------+-------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------+---------------+------------------+
+| M_id | M_name          | M_details                                                                                                                     | Singer                                                            | Actor         | Actress          |
++------+-----------------+-------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------+---------------+------------------+
+|    1 | Gadar2          | {"type": "Commercial", "Zoner": "Action", "No_of_songs": "6", "Release_date": "2023.09.23"}                                   | {"male_singer": "Arijit", "female_singer": "shreya ghosal"}       | Sunny Deol    | Ameesha Patel    |
+|    2 | Rockey aur Rani | {"type": "Documentry", "Zoner": "Thriller", "No_of_songs": "4", "Release_date": "2022.02.19"}                                 | {"male_singer": "Arijit", "female_singer": "Neha Kakkar"}         | Ranveer singh | Alia Bhatt       |
+|    3 | Dear Zindagi    | {"type": "Animation", "Zoner": "Comedy", "No_of_songs": 0, "Release_date": "2012.11.03", "Producer_name": "Krishna Aacharya"} | {"male_singer": "Darshan Rawal", "female_singer": "Dhwani"}       | Shah Rukh     | Alia Bhatt       |
+|    4 | Ram Leela       | {"type": "Documentry", "Zoner": "Action", "No_of_songs": 4, "Release_date": "2013.08.21"}                                     | {"male_singer": "Armaan Malik", "female_singer": "Monali Thakur"} | Ranveer Singh | Deepika padukone |
+|    5 | Shershah        | {"type": "Commercial", "Zoner": "Thriller", "No_of_songs": 3, "Release_date": "2021.06.04"}                                   | {"male_singer": "Arijit", "female_singer": "Dhwani"}              | Siddharth     | Kiara Advani     |
+|    6 | Bahubali        | {"type": "Animation", "Zoner": "Action", "No_of_songs": 6, "Release_date": "2015.05.20"}                                      | {"male_singer": "Darshan Rawal", "female_singer": "Neha Kakkar"}  | Prabhas       | Tamanna Bhatia   |
+|    7 | Andaaz          | {"type": "Commercial", "Zoner": "Comedy", "No_of_songs": 5, "Release_date": "2002.03.10"}                                     | {"male_singer": "Kumar Sanu", "female_singer": "Alka Yagnik"}     | Akshay Kumar  | Priyanka Chopra  |
+|    8 | Bhaijaan        | {"type": "Documentry", "Zoner": "Comedy", "No_of_songs": 0, "Release_date": "2023.07.29"}                                     | {"male_singer": "Arijit", "female_singer": "shreya ghosal"}       | Salman Khan   | Pooja            |
++------+-----------------+-------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------+---------------+------------------+
+8 rows in set (0.00 sec)
+
+________________________________________________________________________________________
+
+Query - 7 : Change the value of zoner of the film ‘Shershah’.
+________________________________________________________________________________________
+
+mysql> update Movie set M_details = json_replace(M_details,'$.Zoner','Action') where M_id = 5;
+Query OK, 1 row affected (0.05 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from Movie;
++------+-----------------+-------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------+---------------+------------------+
+| M_id | M_name          | M_details                                                                                                                     | Singer                                                            | Actor         | Actress          |
++------+-----------------+-------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------+---------------+------------------+
+|    1 | Gadar2          | {"type": "Commercial", "Zoner": "Action", "No_of_songs": "6", "Release_date": "2023.09.23"}                                   | {"male_singer": "Arijit", "female_singer": "shreya ghosal"}       | Sunny Deol    | Ameesha Patel    |
+|    2 | Rockey aur Rani | {"type": "Documentry", "Zoner": "Thriller", "No_of_songs": "4", "Release_date": "2022.02.19"}                                 | {"male_singer": "Arijit", "female_singer": "Neha Kakkar"}         | Ranveer singh | Alia Bhatt       |
+|    3 | Dear Zindagi    | {"type": "Animation", "Zoner": "Comedy", "No_of_songs": 0, "Release_date": "2012.11.03", "Producer_name": "Krishna Aacharya"} | {"male_singer": "Darshan Rawal", "female_singer": "Dhwani"}       | Shah Rukh     | Alia Bhatt       |
+|    4 | Ram Leela       | {"type": "Documentry", "Zoner": "Action", "No_of_songs": 4, "Release_date": "2013.08.21"}                                     | {"male_singer": "Armaan Malik", "female_singer": "Monali Thakur"} | Ranveer Singh | Deepika padukone |
+|    5 | Shershah        | {"type": "Commercial", "Zoner": "Action", "No_of_songs": 3, "Release_date": "2021.06.04"}                                     | {"male_singer": "Arijit", "female_singer": "Dhwani"}              | Siddharth     | Kiara Advani     |
+|    6 | Bahubali        | {"type": "Animation", "Zoner": "Action", "No_of_songs": 6, "Release_date": "2015.05.20"}                                      | {"male_singer": "Darshan Rawal", "female_singer": "Neha Kakkar"}  | Prabhas       | Tamanna Bhatia   |
+|    7 | Andaaz          | {"type": "Commercial", "Zoner": "Comedy", "No_of_songs": 5, "Release_date": "2002.03.10"}                                     | {"male_singer": "Kumar Sanu", "female_singer": "Alka Yagnik"}     | Akshay Kumar  | Priyanka Chopra  |
+|    8 | Bhaijaan        | {"type": "Documentry", "Zoner": "Comedy", "No_of_songs": 0, "Release_date": "2023.07.29"}                                     | {"male_singer": "Arijit", "female_singer": "shreya ghosal"}       | Salman Khan   | Pooja            |
++------+-----------------+-------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------+---------------+------------------+
+8 rows in set (0.00 sec)
+
+________________________________________________________________________________________
+
+Query - 8 : Add the vocal artist name in movie details if the movie type is Animation.
+________________________________________________________________________________________
+
+
+mysql> update Movie set M_details = json_insert(M_details,'$.vocal_Artist','Sonu Nigam') where M_details ->> '$.type' = "Animation";
+Query OK, 2 rows affected (0.01 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+mysql> select * from Movie;
++------+-----------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------+---------------+------------------+
+| M_id | M_name          | M_details                                                                                                                                                   | Singer                                                            | Actor         | Actress          |
++------+-----------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------+---------------+------------------+
+|    1 | Gadar2          | {"type": "Commercial", "Zoner": "Action", "No_of_songs": "6", "Release_date": "2023.09.23"}                                                                 | {"male_singer": "Arijit", "female_singer": "shreya ghosal"}       | Sunny Deol    | Ameesha Patel    |
+|    2 | Rockey aur Rani | {"type": "Documentry", "Zoner": "Thriller", "No_of_songs": "4", "Release_date": "2022.02.19"}                                                               | {"male_singer": "Arijit", "female_singer": "Neha Kakkar"}         | Ranveer singh | Alia Bhatt       |
+|    3 | Dear Zindagi    | {"type": "Animation", "Zoner": "Comedy", "No_of_songs": 0, "Release_date": "2012.11.03", "vocal_Artist": "Sonu Nigam", "Producer_name": "Krishna Aacharya"} | {"male_singer": "Darshan Rawal", "female_singer": "Dhwani"}       | Shah Rukh     | Alia Bhatt       |
+|    4 | Ram Leela       | {"type": "Documentry", "Zoner": "Action", "No_of_songs": 4, "Release_date": "2013.08.21"}                                                                   | {"male_singer": "Armaan Malik", "female_singer": "Monali Thakur"} | Ranveer Singh | Deepika padukone |
+|    5 | Shershah        | {"type": "Commercial", "Zoner": "Action", "No_of_songs": 3, "Release_date": "2021.06.04"}                                                                   | {"male_singer": "Arijit", "female_singer": "Dhwani"}              | Siddharth     | Kiara Advani     |
+|    6 | Bahubali        | {"type": "Animation", "Zoner": "Action", "No_of_songs": 6, "Release_date": "2015.05.20", "vocal_Artist": "Sonu Nigam"}                                      | {"male_singer": "Darshan Rawal", "female_singer": "Neha Kakkar"}  | Prabhas       | Tamanna Bhatia   |
+|    7 | Andaaz          | {"type": "Commercial", "Zoner": "Comedy", "No_of_songs": 5, "Release_date": "2002.03.10"}                                                                   | {"male_singer": "Kumar Sanu", "female_singer": "Alka Yagnik"}     | Akshay Kumar  | Priyanka Chopra  |
+|    8 | Bhaijaan        | {"type": "Documentry", "Zoner": "Comedy", "No_of_songs": 0, "Release_date": "2023.07.29"}                                                                   | {"male_singer": "Arijit", "female_singer": "shreya ghosal"}       | Salman Khan   | Pooja            |
++------+-----------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------+---------------+------------------+
+8 rows in set (0.00 sec)
+
+________________________________________________________________________________________
+
+Query - 9 : Display movie name with its male singlers only.
+________________________________________________________________________________________
+
+mysql> select M_name,Singer ->> '$.male_singer' as Male_Singer from Movie;
++-----------------+---------------+
+| M_name          | Male_Singer   |
++-----------------+---------------+
+| Gadar2          | Arijit        |
+| Rockey aur Rani | Arijit        |
+| Dear Zindagi    | Darshan Rawal |
+| Ram Leela       | Armaan Malik  |
+| Shershah        | Arijit        |
+| Bahubali        | Darshan Rawal |
+| Andaaz          | Kumar Sanu    |
+| Bhaijaan        | Arijit        |
++-----------------+---------------+
+8 rows in set (0.00 sec)
+
+________________________________________________________________________________________
+
+Query - 10 : Display movie name and type whose realese year is greater than 2002.
+________________________________________________________________________________________
+
+mysql> select M_name,M_details ->> '$.type' as MovieType from Movie where M_details ->> '$.Release_date' > 2000;
++-----------------+------------+
+| M_name          | MovieType  |
++-----------------+------------+
+| Gadar2          | Commercial |
+| Rockey aur Rani | Documentry |
+| Dear Zindagi    | Animation  |
+| Ram Leela       | Documentry |
+| Shershah        | Commercial |
+| Bahubali        | Animation  |
+| Andaaz          | Commercial |
+| Bhaijaan        | Documentry |
++-----------------+------------+
+8 rows in set, 8 warnings (0.00 sec)
+
+________________________________________________________________________________________
+
+Query - 11 : Change the name of male singer whose movie type is ‘commercial’.
+________________________________________________________________________________________
+
+
+mysql> update Movie set Singer = json_replace(Singer,'$.male_singer','Udit Narayan') where M_details ->> '$.type'="Commercial";
+Query OK, 3 rows affected (0.01 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
+
+mysql> select * from Movie;
++------+-----------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------+---------------+------------------+
+| M_id | M_name          | M_details                                                                                                                                                   | Singer                                                            | Actor         | Actress          |
++------+-----------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------+---------------+------------------+
+|    1 | Gadar2          | {"type": "Commercial", "Zoner": "Action", "No_of_songs": "6", "Release_date": "2023.09.23"}                                                                 | {"male_singer": "Udit Narayan", "female_singer": "shreya ghosal"} | Sunny Deol    | Ameesha Patel    |
+|    2 | Rockey aur Rani | {"type": "Documentry", "Zoner": "Thriller", "No_of_songs": "4", "Release_date": "2022.02.19"}                                                               | {"male_singer": "Arijit", "female_singer": "Neha Kakkar"}         | Ranveer singh | Alia Bhatt       |
+|    3 | Dear Zindagi    | {"type": "Animation", "Zoner": "Comedy", "No_of_songs": 0, "Release_date": "2012.11.03", "vocal_Artist": "Sonu Nigam", "Producer_name": "Krishna Aacharya"} | {"male_singer": "Darshan Rawal", "female_singer": "Dhwani"}       | Shah Rukh     | Alia Bhatt       |
+|    4 | Ram Leela       | {"type": "Documentry", "Zoner": "Action", "No_of_songs": 4, "Release_date": "2013.08.21"}                                                                   | {"male_singer": "Armaan Malik", "female_singer": "Monali Thakur"} | Ranveer Singh | Deepika padukone |
+|    5 | Shershah        | {"type": "Commercial", "Zoner": "Action", "No_of_songs": 3, "Release_date": "2021.06.04"}                                                                   | {"male_singer": "Udit Narayan", "female_singer": "Dhwani"}        | Siddharth     | Kiara Advani     |
+|    6 | Bahubali        | {"type": "Animation", "Zoner": "Action", "No_of_songs": 6, "Release_date": "2015.05.20", "vocal_Artist": "Sonu Nigam"}                                      | {"male_singer": "Darshan Rawal", "female_singer": "Neha Kakkar"}  | Prabhas       | Tamanna Bhatia   |
+|    7 | Andaaz          | {"type": "Commercial", "Zoner": "Comedy", "No_of_songs": 5, "Release_date": "2002.03.10"}                                                                   | {"male_singer": "Udit Narayan", "female_singer": "Alka Yagnik"}   | Akshay Kumar  | Priyanka Chopra  |
+|    8 | Bhaijaan        | {"type": "Documentry", "Zoner": "Comedy", "No_of_songs": 0, "Release_date": "2023.07.29"}                                                                   | {"male_singer": "Arijit", "female_singer": "shreya ghosal"}       | Salman Khan   | Pooja            |
++------+-----------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------+---------------+------------------+
+8 rows in set (0.00 sec)
+
+________________________________________________________________________________________
+
+Query - 12 : Display movie name and its female singer only with extract function.
+________________________________________________________________________________________
+
+
+mysql> select M_name, json_extract(Singer,'$.female_singer') as Female_Singer from Movie;
++-----------------+-----------------+
+| M_name          | Female_Singer   |
++-----------------+-----------------+
+| Gadar2          | "shreya ghosal" |
+| Rockey aur Rani | "Neha Kakkar"   |
+| Dear Zindagi    | "Dhwani"        |
+| Ram Leela       | "Monali Thakur" |
+| Shershah        | "Dhwani"        |
+| Bahubali        | "Neha Kakkar"   |
+| Andaaz          | "Alka Yagnik"   |
+| Bhaijaan        | "shreya ghosal" |
++-----------------+-----------------+
+8 rows in set (0.01 sec)
+
+________________________________________________________________________________________
+
+Query - 13 : Display Movie name which does not have any songs.
+________________________________________________________________________________________
+
+
+mysql> select M_name from Movie where M_details ->> '$.No_of_songs' = 0;
++--------------+
+| M_name       |
++--------------+
+| Dear Zindagi |
+| Bhaijaan     |
++--------------+
+2 rows in set (0.01 sec)
+________________________________________________________________________________________
+
+Query - 14 : Display movie name and actor details which is not an animation movie.
+________________________________________________________________________________________
+
+
+mysql> select M_name,Actor from Movie where M_details ->> '$.type' != "Animation";
++-----------------+---------------+
+| M_name          | Actor         |
++-----------------+---------------+
+| Gadar2          | Sunny Deol    |
+| Rockey aur Rani | Ranveer singh |
+| Ram Leela       | Ranveer Singh |
+| Shershah        | Siddharth     |
+| Andaaz          | Akshay Kumar  |
+| Bhaijaan        | Salman Khan   |
++-----------------+---------------+
+6 rows in set (0.00 sec)
+________________________________________________________________________________________
+
+Query - 15 : Display movie name and actress name of the movie which is not a documentory film.
+________________________________________________________________________________________
+
+
+mysql> select M_name,Actress from Movie where M_details ->> '$.type' != "Documentry";
++--------------+-----------------+
+| M_name       | Actress         |
++--------------+-----------------+
+| Gadar2       | Ameesha Patel   |
+| Dear Zindagi | Alia Bhatt      |
+| Shershah     | Kiara Advani    |
+| Bahubali     | Tamanna Bhatia  |
+| Andaaz       | Priyanka Chopra |
++--------------+-----------------+
+5 rows in set (0.00 sec)
+________________________________________________________________________________________
+
+Query - 16 : Add production house details and change the value of type whose id is 3.
+________________________________________________________________________________________
+
+
+mysql> update Movie set M_details = json_set(M_details , '$.Production_house','Nashik', '$.type','Animation') where M_id = 3;;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from Movie;
++------+-----------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------+---------------+------------------+
+| M_id | M_name          | M_details                                                                                                                                                                                 | Singer                                                            | Actor         | Actress          |
++------+-----------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------+---------------+------------------+
+|    1 | Gadar2          | {"type": "Commercial", "Zoner": "Action", "No_of_songs": "6", "Release_date": "2023.09.23"}                                                                                               | {"male_singer": "Udit Narayan", "female_singer": "shreya ghosal"} | Sunny Deol    | Ameesha Patel    |
+|    2 | Rockey aur Rani | {"type": "Documentry", "Zoner": "Thriller", "No_of_songs": "4", "Release_date": "2022.02.19"}                                                                                             | {"male_singer": "Arijit", "female_singer": "Neha Kakkar"}         | Ranveer singh | Alia Bhatt       |
+|    3 | Dear Zindagi    | {"type": "Animation", "Zoner": "Comedy", "No_of_songs": 0, "Release_date": "2012.11.03", "vocal_Artist": "Sonu Nigam", "Producer_name": "Krishna Aacharya", "Production_house": "Nashik"} | {"male_singer": "Darshan Rawal", "female_singer": "Dhwani"}       | Shah Rukh     | Alia Bhatt       |
+|    4 | Ram Leela       | {"type": "Documentry", "Zoner": "Action", "No_of_songs": 4, "Release_date": "2013.08.21"}                                                                                                 | {"male_singer": "Armaan Malik", "female_singer": "Monali Thakur"} | Ranveer Singh | Deepika padukone |
+|    5 | Shershah        | {"type": "Commercial", "Zoner": "Action", "No_of_songs": 3, "Release_date": "2021.06.04"}                                                                                                 | {"male_singer": "Udit Narayan", "female_singer": "Dhwani"}        | Siddharth     | Kiara Advani     |
+|    6 | Bahubali        | {"type": "Animation", "Zoner": "Action", "No_of_songs": 6, "Release_date": "2015.05.20", "vocal_Artist": "Sonu Nigam"}                                                                    | {"male_singer": "Darshan Rawal", "female_singer": "Neha Kakkar"}  | Prabhas       | Tamanna Bhatia   |
+|    7 | Andaaz          | {"type": "Commercial", "Zoner": "Comedy", "No_of_songs": 5, "Release_date": "2002.03.10"}                                                                                                 | {"male_singer": "Udit Narayan", "female_singer": "Alka Yagnik"}   | Akshay Kumar  | Priyanka Chopra  |
+|    8 | Bhaijaan        | {"type": "Documentry", "Zoner": "Comedy", "No_of_songs": 0, "Release_date": "2023.07.29"}                                                                                                 | {"male_singer": "Arijit", "female_singer": "shreya ghosal"}       | Salman Khan   | Pooja            |
++------+-----------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------+---------------+------------------+
+8 rows in set (0.00 sec)
+
+________________________________________________________________________________________
+
+Query - 17 : Delete the record of a movie whose type is commercial.
+________________________________________________________________________________________
+
+mysql> delete from Movie where json_extract(M_details,'$.type') = "Commercial";
+Query OK, 3 rows affected (0.01 sec)
+
+mysql> select * from Movie;
++------+-----------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------+---------------+------------------+
+| M_id | M_name          | M_details                                                                                                                                                                                 | Singer                                                            | Actor         | Actress          |
++------+-----------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------+---------------+------------------+
+|    2 | Rockey aur Rani | {"type": "Documentry", "Zoner": "Thriller", "No_of_songs": "4", "Release_date": "2022.02.19"}                                                                                             | {"male_singer": "Arijit", "female_singer": "Neha Kakkar"}         | Ranveer singh | Alia Bhatt       |
+|    3 | Dear Zindagi    | {"type": "Animation", "Zoner": "Comedy", "No_of_songs": 0, "Release_date": "2012.11.03", "vocal_Artist": "Sonu Nigam", "Producer_name": "Krishna Aacharya", "Production_house": "Nashik"} | {"male_singer": "Darshan Rawal", "female_singer": "Dhwani"}       | Shah Rukh     | Alia Bhatt       |
+|    4 | Ram Leela       | {"type": "Documentry", "Zoner": "Action", "No_of_songs": 4, "Release_date": "2013.08.21"}                                                                                                 | {"male_singer": "Armaan Malik", "female_singer": "Monali Thakur"} | Ranveer Singh | Deepika padukone |
+|    6 | Bahubali        | {"type": "Animation", "Zoner": "Action", "No_of_songs": 6, "Release_date": "2015.05.20", "vocal_Artist": "Sonu Nigam"}                                                                    | {"male_singer": "Darshan Rawal", "female_singer": "Neha Kakkar"}  | Prabhas       | Tamanna Bhatia   |
+|    8 | Bhaijaan        | {"type": "Documentry", "Zoner": "Comedy", "No_of_songs": 0, "Release_date": "2023.07.29"}                                                                                                 | {"male_singer": "Arijit", "female_singer": "shreya ghosal"}       | Salman Khan   | Pooja            |
++------+-----------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------+---------------+------------------+
+5 rows in set (0.00 sec)
+
+________________________________________________________________________________________
+
+Query - 18 : Delete the information of produser name. 
+________________________________________________________________________________________
+
+mysql> update Movie set M_details = json_remove(M_details,'$.Producer_name');
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 5  Changed: 1  Warnings: 0
+
+mysql> select * from Movie;
++------+-----------------+------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------+---------------+------------------+
+| M_id | M_name          | M_details                                                                                                                                            | Singer                                                            | Actor         | Actress          |
++------+-----------------+------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------+---------------+------------------+
+|    2 | Rockey aur Rani | {"type": "Documentry", "Zoner": "Thriller", "No_of_songs": "4", "Release_date": "2022.02.19"}                                                        | {"male_singer": "Arijit", "female_singer": "Neha Kakkar"}         | Ranveer singh | Alia Bhatt       |
+|    3 | Dear Zindagi    | {"type": "Animation", "Zoner": "Comedy", "No_of_songs": 0, "Release_date": "2012.11.03", "vocal_Artist": "Sonu Nigam", "Production_house": "Nashik"} | {"male_singer": "Darshan Rawal", "female_singer": "Dhwani"}       | Shah Rukh     | Alia Bhatt       |
+|    4 | Ram Leela       | {"type": "Documentry", "Zoner": "Action", "No_of_songs": 4, "Release_date": "2013.08.21"}                                                            | {"male_singer": "Armaan Malik", "female_singer": "Monali Thakur"} | Ranveer Singh | Deepika padukone |
+|    6 | Bahubali        | {"type": "Animation", "Zoner": "Action", "No_of_songs": 6, "Release_date": "2015.05.20", "vocal_Artist": "Sonu Nigam"}                               | {"male_singer": "Darshan Rawal", "female_singer": "Neha Kakkar"}  | Prabhas       | Tamanna Bhatia   |
+|    8 | Bhaijaan        | {"type": "Documentry", "Zoner": "Comedy", "No_of_songs": 0, "Release_date": "2023.07.29"}                                                            | {"male_singer": "Arijit", "female_singer": "shreya ghosal"}       | Salman Khan   | Pooja            |
++------+-----------------+------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------+---------------+------------------+
+5 rows in set (0.00 sec)
+
+________________________________________________________________________________________
+
+Query - 19 : Display the length of the movie details whose actor is ‘ranveer kapoor’.
+________________________________________________________________________________________
+
+mysql> select json_length(M_details)as LengthOfMovieDetail from Movie where Actor = "Ranveer singh";
++---------------------+
+| LengthOfMovieDetail |	
++---------------------+
+|                   4 |
+|                   4 |
++---------------------+
+2 rows in set (0.00 sec)
+
+________________________________________________________________________________________
+
+Query - 20 : Display the movie name and details which have no.of songs greater then 2.
+________________________________________________________________________________________
+
+mysql> select M_name,M_details from Movie where M_details ->> '$.No_of_songs' > 2;
++-----------------+------------------------------------------------------------------------------------------------------------------------+
+| M_name          | M_details                                                                                                              |
++-----------------+------------------------------------------------------------------------------------------------------------------------+
+| Rockey aur Rani | {"type": "Documentry", "Zoner": "Thriller", "No_of_songs": "4", "Release_date": "2022.02.19"}                          |
+| Ram Leela       | {"type": "Documentry", "Zoner": "Action", "No_of_songs": 4, "Release_date": "2013.08.21"}                              |
+| Bahubali        | {"type": "Animation", "Zoner": "Action", "No_of_songs": 6, "Release_date": "2015.05.20", "vocal_Artist": "Sonu Nigam"} |
++-----------------+------------------------------------------------------------------------------------------------------------------------+
+3 rows in set (0.00 sec)
+________________________________________________________________________________________
+
+Query - 21 : Delete the record of the movie which have male singer ‘Arijit singh’.
+________________________________________________________________________________________
+
+mysql> delete from Movie where json_extract(Singer,'$.male_singer') = "Arijit";
+Query OK, 2 rows affected (0.01 sec)
+
+mysql> select * from Movie;
++------+--------------+------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------+---------------+------------------+
+| M_id | M_name       | M_details                                                                                                                                            | Singer                                                            | Actor         | Actress          |
++------+--------------+------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------+---------------+------------------+
+|    3 | Dear Zindagi | {"type": "Animation", "Zoner": "Comedy", "No_of_songs": 0, "Release_date": "2012.11.03", "vocal_Artist": "Sonu Nigam", "Production_house": "Nashik"} | {"male_singer": "Darshan Rawal", "female_singer": "Dhwani"}       | Shah Rukh     | Alia Bhatt       |
+|    4 | Ram Leela    | {"type": "Documentry", "Zoner": "Action", "No_of_songs": 4, "Release_date": "2013.08.21"}                                                            | {"male_singer": "Armaan Malik", "female_singer": "Monali Thakur"} | Ranveer Singh | Deepika padukone |
+|    6 | Bahubali     | {"type": "Animation", "Zoner": "Action", "No_of_songs": 6, "Release_date": "2015.05.20", "vocal_Artist": "Sonu Nigam"}                               | {"male_singer": "Darshan Rawal", "female_singer": "Neha Kakkar"}  | Prabhas       | Tamanna Bhatia   |
++------+--------------+------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------+---------------+------------------+
+3 rows in set (0.00 sec)
+
+________________________________________________________________________________________
+
+Query - 22 : Delete the information of zoner which has id 6.
+________________________________________________________________________________________
+
+mysql> update Movie set M_details = json_remove(M_details,'$.Zoner') where M_id = 6;
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from Movie;
++------+--------------+------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------+---------------+------------------+
+| M_id | M_name       | M_details                                                                                                                                            | Singer                                                            | Actor         | Actress          |
++------+--------------+------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------+---------------+------------------+
+|    3 | Dear Zindagi | {"type": "Animation", "Zoner": "Comedy", "No_of_songs": 0, "Release_date": "2012.11.03", "vocal_Artist": "Sonu Nigam", "Production_house": "Nashik"} | {"male_singer": "Darshan Rawal", "female_singer": "Dhwani"}       | Shah Rukh     | Alia Bhatt       |
+|    4 | Ram Leela    | {"type": "Documentry", "Zoner": "Action", "No_of_songs": 4, "Release_date": "2013.08.21"}                                                            | {"male_singer": "Armaan Malik", "female_singer": "Monali Thakur"} | Ranveer Singh | Deepika padukone |
+|    6 | Bahubali     | {"type": "Animation", "No_of_songs": 6, "Release_date": "2015.05.20", "vocal_Artist": "Sonu Nigam"}                                                  | {"male_singer": "Darshan Rawal", "female_singer": "Neha Kakkar"}  | Prabhas       | Tamanna Bhatia   |
++------+--------------+------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------+---------------+------------------+
+3 rows in set (0.00 sec)
+
+________________________________________________________________________________________
+
+Query - 23 : Display the actor of the movie with ‘supporting actor’ which has movie name starts as ‘R’.
+________________________________________________________________________________________
+
+mysql> select Actor,Actress from Movie where M_name like "R%";
++---------------+------------------+
+| Actor         | Actress          |
++---------------+------------------+
+| Ranveer Singh | Deepika padukone |
++---------------+------------------+
+1 row in set (0.00 sec)
+________________________________________________________________________________________
+
+Query - 24 : Display the length of the movie detail whose female singer is ‘Neha Kakkar’.
+________________________________________________________________________________________
+
+mysql> select json_length(M_details) as LengthOfM_Detail from Movie where Singer ->> '$.female_singer' = "Neha Kakkar";
++------------------+
+| LengthOfM_Detail |
++------------------+
+|                4 |
++------------------+
+1 row in set (0.00 sec)
+
+________________________________________________________________________________________
+
+Query - 25 : Add the information of budget details and change the value of realese date whose actress is ‘aliya bhatt’.
+________________________________________________________________________________________
+
+
+mysql> update Movie set M_details = json_set(M_details , '$.budget_detail',25000000,'$.Release_date','2005-02-23') where Actress = "Alia Bhatt";
+Query OK, 1 row affected (0.05 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from Movie;
++------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------+---------------+------------------+
+| M_id | M_name       | M_details                                                                                                                                                                       | Singer                                                            | Actor         | Actress          |
++------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------+---------------+------------------+
+|    3 | Dear Zindagi | {"type": "Animation", "Zoner": "Comedy", "No_of_songs": 0, "Release_date": "2005-02-23", "vocal_Artist": "Sonu Nigam", "budget_detail": 25000000, "Production_house": "Nashik"} | {"male_singer": "Darshan Rawal", "female_singer": "Dhwani"}       | Shah Rukh     | Alia Bhatt       |
+|    4 | Ram Leela    | {"type": "Documentry", "Zoner": "Action", "No_of_songs": 4, "Release_date": "2013.08.21"}                                                                                       | {"male_singer": "Armaan Malik", "female_singer": "Monali Thakur"} | Ranveer Singh | Deepika padukone |
+|    6 | Bahubali     | {"type": "Animation", "No_of_songs": 6, "Release_date": "2015.05.20", "vocal_Artist": "Sonu Nigam"}                                                                             | {"male_singer": "Darshan Rawal", "female_singer": "Neha Kakkar"}  | Prabhas       | Tamanna Bhatia   |
++------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------+---------------+------------------+
+3 rows in set (0.00 sec)
+
+________________________________________________________________________________________

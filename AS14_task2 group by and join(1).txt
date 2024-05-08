@@ -1,0 +1,169 @@
+Task-2
+
+mysql> create table City(CityId int primary key,City varchar(30));
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> create table Department(departmentId int primary key,departmentname varchar(30));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> create table Student(studentId int primary key,Name varchar(30),email varchar(30),phone int(10),Address varchar(30),gender varchar(10),departmentid int,foreign key(departmentid) references Department(departmentid),CityId int,foreign key(CityId) references City(CityId));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> select * from Student;
++-----------+--------+---------------------+-----------+-----------+--------+--------------+--------+
+| studentId | Name   | email               | phone     | Address   | gender | departmentid | CityId |
++-----------+--------+---------------------+-----------+-----------+--------+--------------+--------+
+|         1 | Raj    | raj123@gmail.com    | 985674123 | Ahmedabad | Male   |            1 |      1 |
+|         2 | Ramesh | ramesh123@gmail.com | 985674563 | Surat     | Male   |            2 |      2 |
+|         3 | Priya  | Priya121@gmail.com  | 985987563 | Rajkot    | Female |            3 |      3 |
+|         4 | Nita   | Nita21@gmail.com    |  85687563 | Rajkot    | Female |            3 |      3 |
+|         5 | Ram    | Ram21@gmail.com     | 855236563 | Bhuj      | male   |            5 |      5 |
++-----------+--------+---------------------+-----------+-----------+--------+--------------+--------+
+5 rows in set (0.00 sec)
+
+mysql> select * from Professor;
++-------------+-------------+--------------+---------------------+-----------+
+| professorId | Name        | departmentid | email               | phone     |
++-------------+-------------+--------------+---------------------+-----------+
+|           1 | raj sir     |            1 | raj55@yahoo.com     | 852369741 |
+|           2 | prakash sir |            2 | prakash55@yahoo.com | 852368521 |
+|           3 | Akruti mam  |            3 | akruti55@yahoo.com  | 987468521 |
+|           4 | Niyati mam  |            4 | niyati55@yahoo.com  | 985246521 |
+|           5 | anil sir    |            5 | anil55@yahoo.com    | 985252461 |
++-------------+-------------+--------------+---------------------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> select * from Department;
++--------------+----------------+
+| departmentId | departmentname |
++--------------+----------------+
+|            1 | BCA            |
+|            2 | BBA            |
+|            3 | MBA            |
+|            4 | BCOM           |
+|            5 | IMSCIT         |
++--------------+----------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from City;
++--------+-------------+
+| CityId | City        |
++--------+-------------+
+|      1 | Ahmedabad   |
+|      2 | Surat       |
+|      3 | Rajkot      |
+|      4 | Gandhinagar |
+|      5 | Kutchh      |
++--------+-------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from Subjects;
++-------+--------------+--------------+
+| SubId | SubName      | departmentid |
++-------+--------------+--------------+
+|     1 | IOOP         |            1 |
+|     2 | Account      |            2 |
+|     3 | Business Std |            3 |
+|     4 | Statastics   |            4 |
+|     5 | C++          |            5 |
++-------+--------------+--------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from Marksheet;
++---------+-------+-----------+-------+
+| GradeId | SubId | studentId | Marks |
++---------+-------+-----------+-------+
+|       1 |     1 |         1 |    80 |
+|       2 |     2 |         2 |    75 |
+|       3 |     3 |         3 |    82 |
+|       4 |     4 |         4 |    62 |
+|       5 |     5 |         5 |    57 |
++---------+-------+-----------+-------+
+5 rows in set (0.00 sec)
+
+Q-1
+mysql> select count(studentid),gender from Student group by gender;
++------------------+--------+
+| count(studentid) | gender |
++------------------+--------+
+|                2 | Female |
+|                3 | Male   |
++------------------+--------+
+2 rows in set (0.01 sec)
+
+Q-2
+mysql> select count(studentid),departmentId from Student group by departmentId;
++------------------+--------------+
+| count(studentid) | departmentId |
++------------------+--------------+
+|                1 |            1 |
+|                1 |            2 |
+|                2 |            3 |
+|                1 |            5 |
++------------------+--------------+
+4 rows in set (0.01 sec)
+
+Q-3
+mysql> select count(s.studentId),c.City from student s left join City c on c.CityId=s.CityId group by c.city;
++--------------------+-----------+
+| count(s.studentId) | City      |
++--------------------+-----------+
+|                  1 | Ahmedabad |
+|                  1 | Kutchh    |
+|                  2 | Rajkot    |
+|                  1 | Surat     |
++--------------------+-----------+
+4 rows in set (0.01 sec)
+
+Q-4
+mysql> select count(s.studentId),c.City from student s left join City c on c.CityId=s.CityId group by c.city having city="Ahmedabad";
++--------------------+-----------+
+| count(s.studentId) | City      |
++--------------------+-----------+
+|                  1 | Ahmedabad |
++--------------------+-----------+
+1 row in set (0.01 sec)
+
+Q-5
+mysql> select d.departmentname,count(s.studentid) from Department d left join Student s on d.departmentId=s.departmentid group by d.departmentname;
++----------------+--------------------+
+| departmentname | count(s.studentid) |
++----------------+--------------------+
+| BBA            |                  1 |
+| BCA            |                  1 |
+| BCOM           |                  0 |
+| IMSCIT         |                  1 |
+| MBA            |                  2 |
++----------------+--------------------+
+5 rows in set (0.01 sec)
+
+Q-6
+mysql> select d.departmentname,count(s.SubId) from department d inner join Subjects s on d.departmentId=s.Subid group by d.departmentname;
++----------------+----------------+
+| departmentname | count(s.SubId) |
++----------------+----------------+
+| BBA            |              1 |
+| BCA            |              1 |
+| BCOM           |              1 |
+| IMSCIT         |              1 |
+| MBA            |              1 |
++----------------+----------------+
+5 rows in set (0.00 sec)
+
+Q-7
+mysql> select count(s.SubId),d.departmentname,d.departmentId from Subjects s left join Department d on s.departmentid=d.departmentId group by d.departmentname,d.departmentId having d.departmentId=4;
++----------------+----------------+--------------+
+| count(s.SubId) | departmentname | departmentId |
++----------------+----------------+--------------+
+|              1 | BCOM           |            4 |
++----------------+----------------+--------------+
+1 row in set (0.00 sec)
+
+Q-8
+mysql> select count(s.studentId),d.departmentname,d.departmentId from Student s left join Department d on s.departmentid=d.departmentId group by d.departmentname,d.departmentId having d.departmentId=2;
++--------------------+----------------+--------------+
+| count(s.studentId) | departmentname | departmentId |
++--------------------+----------------+--------------+
+|                  1 | BBA            |            2 |
++--------------------+----------------+--------------+
+1 row in set (0.01 sec)

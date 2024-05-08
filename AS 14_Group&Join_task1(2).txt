@@ -1,0 +1,250 @@
+table -1
+
+mysql> select * from stud;
++------+--------+-----------+------------+
+| roll | name   | city      | BOD        |
++------+--------+-----------+------------+
+|    1 | Ashwin | Ahmedabad | 2004-01-02 |
+|    2 | chirag | surat     | 2002-03-29 |
+|    3 | Priya  | Mumbai    | 2003-09-23 |
+|    4 | Heena  | Ahmedabad | 2009-12-11 |
+|    5 | Kartik | vaapi     | 2005-07-18 |
+|    6 | Tilak  | Vadodara  | 2001-07-08 |
+|    7 | Hetal  | vaapi     | 2000-01-12 |
++------+--------+-----------+------------+
+7 rows in set (0.00 sec)
+
+
+table - 2
+
+mysql> select * from mark;
++-------+---------+--------+------+
+| sr_no | subject | rollno | mark |
++-------+---------+--------+------+
+|   101 | FOS     |      1 |   59 |
+|   102 | DBMS    |      2 |   80 |
+|   103 | FOS     |      3 |   45 |
+|   104 | HTML    |      4 |   68 |
+|   105 | JAVA    |      5 |   92 |
++-------+---------+--------+------+
+5 rows in set (0.00 sec)
+
+
+table -3
+
+mysql> select * from course;
++------+--------+--------+
+| c_id | c_name | rollno |
++------+--------+--------+
+|    1 | BCA    |      1 |
+|    2 | BBA    |      2 |
+|    3 | IMCA   |      3 |
+|    4 | BCA    |      4 |
+|    5 | BBA    |      5 |
+|    6 | IMCA   |      6 |
+|    7 | BBA    |      7 |
++------+--------+--------+
+7 rows in set (0.00 sec)
+
+
+__________________________________________________________
+
+query -1 :
+
+mysql> select stud.roll,mark.subject from stud join mark on stud.roll = mark.rollno;
++------+---------+
+| roll | subject |
++------+---------+
+|    1 | FOS     |
+|    2 | DBMS    |
+|    3 | FOS     |
+|    4 | HTML    |
+|    5 | JAVA    |
++------+---------+
+5 rows in set (0.00 sec)
+
+Query -2 :
+
+mysql> select stud.name,mark.subject,mark.mark from stud inner join mark on stud.roll = mark.rollno where name like "A%";
++--------+---------+------+
+| name   | subject | mark |
++--------+---------+------+
+| Ashwin | FOS     |   59 |
++--------+---------+------+
+1 row in set (0.00 sec)
+
+
+Query -3 :
+
+mysql> select stud.roll,stud.name,course.c_name from stud join course on stud.roll = course.rollno;
++------+--------+--------+
+| roll | name   | c_name |
++------+--------+--------+
+|    1 | Ashwin | BCA    |
+|    2 | chirag | BBA    |
+|    3 | Priya  | IMCA   |
+|    4 | Heena  | BCA    |
+|    5 | Kartik | BBA    |
+|    6 | Tilak  | IMCA   |
+|    7 | Hetal  | BBA    |
++------+--------+--------+
+7 rows in set (0.00 sec)
+
+
+Query -4 :
+
+mysql> select roll,name,city,BOD,sr_no,mark,subject,rollno from stud join mark on stud.roll = mark.rollno where city="Surat";
++------+--------+-------+------------+-------+------+---------+--------+
+| roll | name   | city  | BOD        | sr_no | mark | subject | rollno |
++------+--------+-------+------------+-------+------+---------+--------+
+|    2 | chirag | surat | 2002-03-29 |   102 |   80 | DBMS    |      2 |
++------+--------+-------+------------+-------+------+---------+--------+
+1 row in set (0.00 sec)
+
+
+Query -5 :
+
+mysql> select name from stud join course on stud.roll = course.rollno where c_name = "BCA";
++--------+
+| name   |
++--------+
+| Ashwin |
+| Heena  |
++--------+
+2 rows in set (0.00 sec)
+
+
+Query -6 :
+
+mysql> select name,BOD from stud left join mark on stud.roll = mark.rollno where subject = "FOS";
++--------+------------+
+| name   | BOD        |
++--------+------------+
+| Ashwin | 2004-01-02 |
+| Priya  | 2003-09-23 |
++--------+------------+
+2 rows in set (0.00 sec)
+
+
+Query - 7 :
+
+mysql> select * from stud where (select count(city)from stud);
++------+--------+-----------+------------+
+| roll | name   | city      | BOD        |
++------+--------+-----------+------------+
+|    1 | Ashwin | Ahmedabad | 2004-01-02 |
+|    2 | chirag | surat     | 2002-03-29 |
+|    3 | Priya  | Mumbai    | 2003-09-23 |
+|    4 | Heena  | Ahmedabad | 2009-12-11 |
+|    5 | Kartik | vaapi     | 2005-07-18 |
+|    6 | Tilak  | Vadodara  | 2001-07-08 |
+|    7 | Hetal  | vaapi     | 2000-01-12 |
++------+--------+-----------+------------+
+7 rows in set (0.00 sec)
+
+
+Query -8 :
+
+mysql> select max(mark)as Maximum from mark where (select max(mark)from mark);
++---------+
+| Maximum |
++---------+
+|      92 |
++---------+
+1 row in set (0.00 sec)
+
+
+Query - 9:
+
+mysql> select avg(mark) as AVERAGE from mark group by mark having avg(mark)>50;
++---------+
+| AVERAGE |
++---------+
+| 59.0000 |
+| 80.0000 |
+| 68.0000 |
+| 92.0000 |
++---------+
+4 rows in set (0.04 sec)
+
+
+Query -10 :
+
+mysql> select count(name) as TotNoOfStud from stud INNER JOIN course on stud.roll = course.rollno where c_name = "BCA";
++-------------+
+| TotNoOfStud |
++-------------+
+|           2 |
++-------------+
+1 row in set (0.00 sec)
+
+
+Query -11 :
+
+mysql> select * from course group by c_id having max(rollno)>5;
++------+--------+--------+
+| c_id | c_name | rollno |
++------+--------+--------+
+|    6 | IMCA   |      6 |
+|    7 | BBA    |      7 |
++------+--------+--------+
+2 rows in set (0.00 sec)
+
+
+Query -12 :
+
+mysql> select count(name) as TotNoOfStud from stud where city="Ahmedabad";
++-------------+
+| TotNoOfStud |
++-------------+
+|           2 |
++-------------+
+1 row in set (0.00 sec)
+
+
+Query -13 :
+
+mysql> select stud.name,mark.subject,mark.mark from stud INNER JOIN mark on stud.roll = mark.rollno where roll>3;
++--------+---------+------+
+| name   | subject | mark |
++--------+---------+------+
+| Heena  | HTML    |   68 |
+| Kartik | JAVA    |   92 |
++--------+---------+------+
+2 rows in set (0.00 sec)
+
+
+Query -14 :
+
+mysql> select * from stud join course on stud.roll = course.rollno where c_name = "IMCA";
++------+-------+----------+------------+------+--------+--------+
+| roll | name  | city     | BOD        | c_id | c_name | rollno |
++------+-------+----------+------------+------+--------+--------+
+|    3 | Priya | Mumbai   | 2003-09-23 |    3 | IMCA   |      3 |
+|    6 | Tilak | Vadodara | 2001-07-08 |    6 | IMCA   |      6 |
++------+-------+----------+------------+------+--------+--------+
+2 rows in set (0.00 sec)
+
+
+Query -15 :
+
+mysql> select city from stud group by roll having max(roll)>5;
++----------+
+| city     |
++----------+
+| Vadodara |
+| vaapi    |
++----------+
+2 rows in set (0.01 sec)
+
+
+Query - 16 :
+
+mysql> select c_name from course group by c_id having max(rollno)>5;
++--------+
+| c_name |
++--------+
+| IMCA   |
+| BBA    |
++--------+
+2 rows in set (0.00 sec)

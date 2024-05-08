@@ -1,0 +1,167 @@
+task_3
+
+Q-1
+mysql> select * from emp_det e inner join department_ d on  e.dept_id=d.dept_id;
++-----+--------+---------+------------+---------+------------+------------+
+| eno | salary | dept_id | doj        | dept_id | dname      | d_location |
++-----+--------+---------+------------+---------+------------+------------+
+|   1 |  50000 |       1 | 1992-02-02 |       1 | finance    | mumbai     |
+|   2 |  53000 |       2 | 1999-03-02 |       2 | managing   | ahmedabad  |
+|   3 |  43000 |       3 | 2000-03-02 |       3 | accounting | Rajkot     |
+|   4 |  43000 |       4 | 2004-03-12 |       4 | accounting | Bhopal     |
+|   5 |  35000 |       5 | 2008-12-12 |       5 | sales      | Mumbai     |
+|   6 |  45000 |       6 | 2010-10-10 |       6 | accounting | Delhi      |
+|   7 |  30000 |       7 | 2013-08-10 |       7 | Finance    | Tamil      |
+|   8 |  60000 |       8 | 1980-08-10 |       8 | managing   | ahmedabad  |
++-----+--------+---------+------------+---------+------------+------------+
+8 rows in set (0.00 sec)
+
+Q-2
+mysql> select count(emp_det.eno),emp.city from emp inner join emp_det on emp.E_no=emp_det.eno group by city;
++--------------------+-----------+
+| count(emp_det.eno) | city      |
++--------------------+-----------+
+|                  1 | ahmedabad |
+|                  1 | amreli    |
+|                  1 | jammu     |
+|                  3 | Mumbai    |
+|                  1 | Rajkot    |
+|                  1 | Virpur    |
++--------------------+-----------+
+6 rows in set (0.00 sec)
+
+Q-3
+mysql>  select department_.dname from department_ left join emp_det on department_.dept_id=emp_det.dept_id group by dname having count(*)>5;
++-----------+
+|   dname   |
++------------+
+| accounting |
++------------+
+1 row in set (0.00 sec)
+
+Q-4
+mysql> select count(dname),d_location as no_d from department_ group by d_location;
++--------------+-----------+
+| count(dname) | no_d      |
++--------------+-----------+
+|            3 | ahmedabad |
+|            1 | Bhopal    |
+|            1 | Delhi     |
+|            3 | mumbai    |
+|            1 | Rajkot    |
+|            1 | Tamil     |
++--------------+-----------+
+6 rows in set (0.00 sec)
+
+Q-5
+mysql> select max(emp_det.salary),dname from emp_det inner join department_ on emp_det.dept_id=department_.dept_id group by dname;
++---------------------+------------+
+| max(emp_det.salary) | dname      |
++---------------------+------------+
+|               50000 | accounting |
+|               50000 | finance    |
+|               60000 | managing   |
+|               35000 | sales      |
++---------------------+------------+
+4 rows in set (0.00 sec)
+
+Q-6
+mysql> select emp.E_no,emp.Ename,emp.DOB,emp.ph_no,emp_det.salary from emp right join emp_det on emp.E_no=emp_det.eno where(DOB)>1999;
++------+---------+------------+-----------+--------+
+| E_no | Ename   | DOB        | ph_no     | salary |
++------+---------+------------+-----------+--------+
+|    1 | Raj     | 1946-02-12 | 963258741 |  50000 |
+|    2 | Mayur   | 1934-12-01 | 963252365 |  53000 |
+|    3 | Darshan | 1999-02-01 | 852252365 |  43000 |
+|    4 | Ram     | 1932-02-12 | 852285465 |  43000 |
+|    5 | Arjun   | 1942-02-12 | 852287412 |  35000 |
+|    6 | Aakash  | 2000-02-12 | 852187412 |  45000 |
+|    7 | Aakruti | 1995-01-15 | 852857412 |  30000 |
+|    8 | Aarti   | 2001-01-15 | 852857412 |  60000 |
++------+---------+------------+-----------+--------+
+8 rows in set, 1 warning (0.00 sec)
+
+Q-7
+mysql> select department_.dname,emp_det.doj from department_ left join emp_det on emp_det.dept_id=department_.dept_id where month(doj)=1;
++------------+------------+
+| dname      | doj        |
++------------+------------+
+| accounting | 1998-01-01 |
+| accounting | 2005-01-01 |
++------------+------------+
+2 rows in set (0.00 sec)
+
+Q-8
+mysql> update emp set city="mumbai" where timestampdiff(year,DOB,now())<40;
+Query OK, 3 rows affected (0.01 sec)
+Rows matched: 4  Changed: 3  Warnings: 0
+
+mysql> select * from emp;
++------+---------+-----------+------------+-----------+
+| E_no | Ename   | city      | DOB        | ph_no     |
++------+---------+-----------+------------+-----------+
+|    1 | Raj     | ahmedabad | 1946-02-12 | 963258741 |
+|    2 | Mayur   | amreli    | 1934-12-01 | 963252365 |
+|    3 | Darshan | mumbai    | 1999-02-01 | 852252365 |
+|    4 | Ram     | Virpur    | 1932-02-12 | 852285465 |
+|    5 | Arjun   | mumbai    | 1942-02-12 | 852287412 |
+|    6 | Aakash  | mumbai    | 2000-02-12 | 852187412 |
+|    7 | Aakruti | mumbai    | 1995-01-15 | 852857412 |
+|    8 | Aarti   | mumbai    | 2001-01-15 | 852857412 |
++------+---------+-----------+------------+-----------+
+8 rows in set (0.00 sec)
+
+Q-9
+mysql> select * from emp_det join department_ using(dept_id);
++---------+-----+--------+------------+------------+------------+
+| dept_id | eno | salary | doj        | dname      | d_location |
++---------+-----+--------+------------+------------+------------+
+|       1 |   1 |  50000 | 1992-02-02 | finance    | mumbai     |
+|       2 |   2 |  53000 | 1999-03-02 | managing   | ahmedabad  |
+|       3 |   3 |  43000 | 2000-03-02 | accounting | Rajkot     |
+|       4 |   4 |  43000 | 2004-03-12 | accounting | Bhopal     |
+|       5 |   5 |  35000 | 2008-12-12 | sales      | Mumbai     |
+|       6 |   6 |  45000 | 2010-10-10 | accounting | Delhi      |
+|       7 |   7 |  30000 | 2013-08-10 | Finance    | Tamil      |
+|       8 |   8 |  60000 | 1980-08-10 | managing   | ahmedabad  |
+|       9 |   9 |  40000 | 1998-01-01 | accounting | ahmedabad  |
+|      10 |  10 |  50000 | 2005-01-01 | accounting | Mumbai     |
++---------+-----+--------+------------+------------+------------+
+10 rows in set (0.00 sec)
+
+Q-10
+mysql> select count(E_no),city from emp group by city having count(*)>3;
++-------------+--------+
+| count(E_no) | city   |
++-------------+--------+
+|           5 | mumbai |
++-------------+--------+
+1 row in set (0.00 sec)
+
+Q-11
+mysql> delete from emp where timestampdiff(year,DOB,now())>60;
+Query OK, 4 rows affected (0.01 sec)
+
+mysql> select * from emp;
++------+---------+--------+------------+-----------+
+| E_no | Ename   | city   | DOB        | ph_no     |
++------+---------+--------+------------+-----------+
+|    3 | Darshan | mumbai | 1999-02-01 | 852252365 |
+|    6 | Aakash  | mumbai | 2000-02-12 | 852187412 |
+|    7 | Aakruti | mumbai | 1995-01-15 | 852857412 |
+|    8 | Aarti   | mumbai | 2001-01-15 | 852857412 |
++------+---------+--------+------------+-----------+
+4 rows in set (0.00 sec)
+
+Q-12
+mysql> select department_.dname,emp_det.eno,emp_det.salary from emp_det inner join department_ on emp_det.dept_id=department_.dept_id where year(doj)>2000;
++------------+-----+--------+
+| dname      | eno | salary |
++------------+-----+--------+
+| accounting |   4 |  43000 |
+| sales      |   5 |  35000 |
+| accounting |   6 |  45000 |
+| Finance    |   7 |  30000 |
+| accounting |  10 |  50000 |
++------------+-----+--------+
+5 rows in set (0.00 sec)

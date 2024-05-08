@@ -1,0 +1,233 @@
+mysql> create table departmentt(d_id int(10) primary key,name varchar(50),regionalgroup varchar(60));
+ERROR 1050 (42S01): Table 'departmentt' already exists
+mysql> create table departmenttt(d_id int(10) primary key,name varchar(50),regionalgroup varchar(60));
+Query OK, 0 rows affected, 1 warning (0.03 sec)
+
+mysql> insert into departmenttt values(10,"accounting","newyourk");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into departmenttt values(20,"research","dallas");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into departmenttt values(30,"sales","chicago");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into departmenttt values(40,"operations","boston");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from departmenttt;
++------+------------+---------------+
+| d_id | name       | regionalgroup |
++------+------------+---------------+
+|   10 | accounting | newyourk      |
+|   20 | research   | dallas        |
+|   30 | sales      | chicago       |
+|   40 | operations | boston        |
++------+------------+---------------+
+4 rows in set (0.00 sec)
+
+mysql> create table designation(job_id int(30) primary key,function varchar(60));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'function varchar(60))' at line 1
+mysql> create table designation(job_id int(30) primary key,Function varchar(60));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Function varchar(60))' at line 1
+mysql> create table designation(job_id int(30) primary key,Functions varchar(60));
+Query OK, 0 rows affected, 1 warning (0.02 sec)
+
+mysql> insert into designation values(667,"clerk");
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into designation values(668,"staff");
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into designation values(669,"analyst");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into designation values(670,"saleperson");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into designation values(671,"manager");
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into designation values(672,"president");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from designation;
++--------+------------+
+| job_id | Functions  |
++--------+------------+
+|    667 | clerk      |
+|    668 | staff      |
+|    669 | analyst    |
+|    670 | saleperson |
+|    671 | manager    |
+|    672 | president  |
++--------+------------+
+6 rows in set (0.00 sec)
+
+mysql> create table employeee(emp_id int(20) primary key,fname varchar(60),lname varchar(60),job_id int foreign key(job_id) references designation(job_id),manager_id bigint(215),hire_date date,salary bigint(215),d_id foreign key(d_id) references departmenttt(d_id));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'foreign key(job_id) references designation(job_id),manager_id bigint(215),hire_d' at line 1
+mysql> create table employeee(emp_id int(20) primary key,fname varchar(60),lname varchar(60),job_id int foreign key(job_id) references designation (job_id),manager_id bigint(215),hire_date date,salary bigint(215),d_id foreign key(d_id) references departmenttt(d_id));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'foreign key(job_id) references designation (job_id),manager_id bigint(215),hire_' at line 1
+mysql> create table employeee(emp_id int(20) primary key,fname varchar(60),lname varchar(60),job_id int foreign key(job_id) references designation (job_id),manager_id bigint(215),hire_date date,salary bigint(215),d_id int);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'foreign key(job_id) references designation (job_id),manager_id bigint(215),hire_' at line 1
+mysql> create table employeee(emp_id int(20) primary key,fname varchar(60),lname varchar(60),job_id int foreign key(job_id) references designation(job_id),manager_id bigint(215),hire_date date,salary bigint(215),d_id int);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'foreign key(job_id) references designation(job_id),manager_id bigint(215),hire_d' at line 1
+mysql> create table employeee(emp_id int(20) primary key,fname varchar(60),lname varchar(60),manager_id bigint(215),hire_date date,salary bigint(215),d_id int);
+ERROR 1050 (42S01): Table 'employeee' already exists
+mysql> create table employe(emp_id int(20) primary key,fname varchar(60),lname varchar(60),manager_id bigint(215),hire_date date,salary bigint(215),d_id int);
+Query OK, 0 rows affected, 3 warnings (0.04 sec)
+
+mysql> alter table employe add foreign key(job_id) references designation(job_id));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1
+mysql> alter table employe add foreign key(job_id) references designation(job_id);
+ERROR 1072 (42000): Key column 'job_id' doesn't exist in table
+mysql> alter table employe add foreign key(j_id) references designation(job_id);
+ERROR 1072 (42000): Key column 'j_id' doesn't exist in table
+mysql> alter table employe add foreign key(job_id) references designation(job_id);
+ERROR 1072 (42000): Key column 'job_id' doesn't exist in table
+mysql> create table employe(emp_id int(20) primary key,fname varchar(60),lname varchar(60),job_id int,manager_id bigint(215),hire_date date,salary bigint(215),d_id int);
+ERROR 1050 (42S01): Table 'employe' already exists
+mysql> create table eemploye(emp_id int(20) primary key,fname varchar(60),lname varchar(60),job_id int,manager_id bigint(215),hire_date date,salary bigint(215),d_id int);
+Query OK, 0 rows affected, 3 warnings (0.05 sec)
+
+mysql> alter table eemploye add foreign key(job_id) references designation(job_id);
+Query OK, 0 rows affected (0.07 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table eemploye add foreign key(d_id) references departmenttt(d_id);
+Query OK, 0 rows affected (0.06 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from eemploye;
+Empty set (0.00 sec)
+
+mysql> insert into eemploye values(1,"smith","john",667,7902,'1984-10-17',800,20);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into eemploye values(2,"allen","kevin",670,7698,'1985-02-20',1600,30);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into eemploye values(3,"doyle","jean",671,7839,'1985-04-04',2850,30);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into eemploye values(4,"dennis","lynn",671,7839,'1985-05-15',2750,30);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into eemploye values(5,"baker","leslie",671,7839,'1985-07-10',2200,40);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into eemploye values(6,"wark","synthia",670,7698,'1985-02-22',1250,30);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from eemploye;
++--------+--------+---------+--------+------------+------------+--------+------+
+| emp_id | fname  | lname   | job_id | manager_id | hire_date  | salary | d_id |
++--------+--------+---------+--------+------------+------------+--------+------+
+|      1 | smith  | john    |    667 |       7902 | 1984-10-17 |    800 |   20 |
+|      2 | allen  | kevin   |    670 |       7698 | 1985-02-20 |   1600 |   30 |
+|      3 | doyle  | jean    |    671 |       7839 | 1985-04-04 |   2850 |   30 |
+|      4 | dennis | lynn    |    671 |       7839 | 1985-05-15 |   2750 |   30 |
+|      5 | baker  | leslie  |    671 |       7839 | 1985-07-10 |   2200 |   40 |
+|      6 | wark   | synthia |    670 |       7698 | 1985-02-22 |   1250 |   30 |
++--------+--------+---------+--------+------------+------------+--------+------+
+6 rows in set (0.00 sec)
+
+mysql> select * from eemploye where salary=(select max(salary) from eemploye);
++--------+-------+-------+--------+------------+------------+--------+------+
+| emp_id | fname | lname | job_id | manager_id | hire_date  | salary | d_id |
++--------+-------+-------+--------+------------+------------+--------+------+
+|      3 | doyle | jean  |    671 |       7839 | 1985-04-04 |   2850 |   30 |
++--------+-------+-------+--------+------------+------------+--------+------+
+1 row in set (0.01 sec)
+
+mysql> select * from eemploye where d_id in(select d_id from departmenttt where name="research");
++--------+-------+-------+--------+------------+------------+--------+------+
+| emp_id | fname | lname | job_id | manager_id | hire_date  | salary | d_id |
++--------+-------+-------+--------+------------+------------+--------+------+
+|      1 | smith | john  |    667 |       7902 | 1984-10-17 |    800 |   20 |
++--------+-------+-------+--------+------------+------------+--------+------+
+1 row in set (0.00 sec)
+
+mysql> select * from departmenttt;
++------+------------+---------------+
+| d_id | name       | regionalgroup |
++------+------------+---------------+
+|   10 | accounting | newyourk      |
+|   20 | research   | dallas        |
+|   30 | sales      | chicago       |
+|   40 | operations | boston        |
++------+------------+---------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from designation;
++--------+------------+
+| job_id | Functions  |
++--------+------------+
+|    667 | clerk      |
+|    668 | staff      |
+|    669 | analyst    |
+|    670 | saleperson |
+|    671 | manager    |
+|    672 | president  |
++--------+------------+
+6 rows in set (0.01 sec)
+
+mysql> select * from eemploye;
++--------+--------+---------+--------+------------+------------+--------+------+
+| emp_id | fname  | lname   | job_id | manager_id | hire_date  | salary | d_id |
++--------+--------+---------+--------+------------+------------+--------+------+
+|      1 | smith  | john    |    667 |       7902 | 1984-10-17 |    800 |   20 |
+|      2 | allen  | kevin   |    670 |       7698 | 1985-02-20 |   1600 |   30 |
+|      3 | doyle  | jean    |    671 |       7839 | 1985-04-04 |   2850 |   30 |
+|      4 | dennis | lynn    |    671 |       7839 | 1985-05-15 |   2750 |   30 |
+|      5 | baker  | leslie  |    671 |       7839 | 1985-07-10 |   2200 |   40 |
+|      6 | wark   | synthia |    670 |       7698 | 1985-02-22 |   1250 |   30 |
++--------+--------+---------+--------+------------+------------+--------+------+
+6 rows in set (0.00 sec)
+
+mysql> select * from eemployee where job_in in(select job_id from designation where Functions="analyst");
+ERROR 1146 (42S02): Table 'mysql.eemployee' doesn't exist
+mysql> select * from eemploye where job_in in(select job_id from designation where Functions="analyst");
+ERROR 1054 (42S22): Unknown column 'job_in' in 'IN/ALL/ANY subquery'
+mysql> select * from eemploye where job_id in(select job_id from designation where Functions="analyst");
+Empty set (0.00 sec)
+
+mysql> select * from eemploye where d_id in(select d_id from departmenttt where regionalgroup="newyourk");
+Empty set (0.00 sec)
+
+mysql> select count(*) as totalemployee from eemploye where d_id in(select d_id from departmenttt where name="sales");
++---------------+
+| totalemployee |
++---------------+
+|             4 |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> update eemploye set salary=salary + (salary*15/100) where job_id in(select job_id from designation where Functions="staff");
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+mysql> select * from eemploye;
++--------+--------+---------+--------+------------+------------+--------+------+
+| emp_id | fname  | lname   | job_id | manager_id | hire_date  | salary | d_id |
++--------+--------+---------+--------+------------+------------+--------+------+
+|      1 | smith  | john    |    667 |       7902 | 1984-10-17 |    800 |   20 |
+|      2 | allen  | kevin   |    670 |       7698 | 1985-02-20 |   1600 |   30 |
+|      3 | doyle  | jean    |    671 |       7839 | 1985-04-04 |   2850 |   30 |
+|      4 | dennis | lynn    |    671 |       7839 | 1985-05-15 |   2750 |   30 |
+|      5 | baker  | leslie  |    671 |       7839 | 1985-07-10 |   2200 |   40 |
+|      6 | wark   | synthia |    670 |       7698 | 1985-02-22 |   1250 |   30 |
++--------+--------+---------+--------+------------+------------+--------+------+
+6 rows in set (0.00 sec)
+
+mysql> select max(salary) as secondheightsalary from eemploye where salary<(salary max(salary) from eemploye;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'max(salary) from eemploye' at line 1
+mysql> select max(salary) as secondheightsalary from eemploye where salary<(select max(salary) from eemploye;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> select max(salary) as secondheightsalary from eemploye where salary<(select max(salary) from eemploye);
++--------------------+
+| secondheightsalary |
++--------------------+
+|               2750 |
++--------------------+
+1 row in set (0.00 sec)

@@ -1,0 +1,359 @@
+Name : Parmar Darshan k.
+Roll : AS44
+
+
+_________________________________________________________________________________________________________________________
+
+->  Project_Detail Table :
+_________________________________________________________________________________________________________________________
+
+
+mysql> create table Project_Detail(project_id int primary key,project_name varchar(15),Front_end varchar(10),Back_end varchar(10),projectDetail json);
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> insert into Project_Detail values(01,"LMS","HTML","MySQL",'{ "Title" : "Doctor APP", "Year" : "2020.02.23" , "Duration" : "5" }' );
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Project_Detail values(02,"GKD","CSS","SQLite",'{ "Title" : "E-nursery", "Year" : "2022.06.03" , "Duration" : "10" }' );
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Project_Detail values(03,"CMS","HTML","MySQL",'{ "Title" : "E-farming", "Year" : "2023.09.23" , "Duration" : "7" }' );
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Project_Detail values(04,"API","HTML","MySQL",'{ "Title" : "Doctor APP", "Year" : "2021.12.14" , "Duration" : "3" }' );
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Project_Detail values(05,"JDK","PHP","SQLite",'{ "Title" : "E-farming", "Year" : "2019.03.06" , "Duration" : "5" }' );
+Query OK, 1 row affected (0.05 sec)
+
+mysql> select * from Project_Detail;
++------------+--------------+-----------+----------+----------------------------------------------------------------+
+| project_id | project_name | Front_end | Back_end | projectDetail                                                  |
++------------+--------------+-----------+----------+----------------------------------------------------------------+
+|          1 | LMS          | HTML      | MySQL    | {"Year": "2020.02.23", "Title": "Doctor APP", "Duration": "5"} |
+|          2 | GKD          | CSS       | SQLite   | {"Year": "2022.06.03", "Title": "E-nursery", "Duration": "10"} |
+|          3 | CMS          | HTML      | MySQL    | {"Year": "2023.09.23", "Title": "E-farming", "Duration": "7"}  |
+|          4 | API          | HTML      | MySQL    | {"Year": "2021.12.14", "Title": "Doctor APP", "Duration": "3"} |
+|          5 | JDK          | PHP       | SQLite   | {"Year": "2019.03.06", "Title": "E-farming", "Duration": "5"}  |
++------------+--------------+-----------+----------+----------------------------------------------------------------+
+5 rows in set (0.00 sec)
+
+
+_________________________________________________________________________________________________________________________
+
+->  Employee_Detail Table :
+_________________________________________________________________________________________________________________________
+
+
+mysql> create table Employee_Detail(E_id int primary key,E_name varchar(12),Address varchar(20),Project_id int,foreign key(Project_id) references Project_Detail(project_id));
+Query OK, 0 rows affected (0.09 sec)
+
+mysql> insert into Employee_Detail value(1,"Jainam","Vadodara",03);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into Employee_Detail value(2,"Aditya","Ahmedabad",02);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into Employee_Detail value(3,"Revati","Surat",01);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Employee_Detail value(4,"Pranav","Ahmedabad",05);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into Employee_Detail value(5,"Payal","Mumbai",04);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from Employee_Detail;
++------+--------+-----------+------------+
+| E_id | E_name | Address   | Project_id |
++------+--------+-----------+------------+
+|    1 | Jainam | Vadodara  |          3 |
+|    2 | Aditya | Ahmedabad |          2 |
+|    3 | Revati | Surat     |          1 |
+|    4 | Pranav | Ahmedabad |          5 |
+|    5 | Payal  | Mumbai    |          4 |
++------+--------+-----------+------------+
+5 rows in set (0.00 sec)
+
+_________________________________________________________________________________________________________________________
+
+-----------------------------------------------------( Queries )---------------------------------------------------------
+_________________________________________________________________________________________________________________________
+
+
+Query - 1 : 
+
+(i) using join
+
+mysql> select E_id,E_name,Address,Project_id from Employee_Detail left join Project_Detail using(project_id) where project_name = "LMS";
++------+--------+---------+------------+
+| E_id | E_name | Address | Project_id |
++------+--------+---------+------------+
+|    3 | Revati | Surat   |          1 |
++------+--------+---------+------------+
+1 row in set (0.00 sec)
+
+(ii) using sub-query
+
+mysql> select * from Employee_Detail where Project_id = (select project_id from Project_Detail where project_name = "LMS");
++------+--------+---------+------------+
+| E_id | E_name | Address | Project_id |
++------+--------+---------+------------+
+|    3 | Revati | Surat   |          1 |
++------+--------+---------+------------+
+1 row in set (0.01 sec)
+
+_________________________________________________________________________________________________________________________
+
+
+Query - 2 :
+
+
+mysql> select project_name,Front_end,Back_end from Employee_Detail left join Project_Detail using(project_id) where E_name = "Aditya";
++--------------+-----------+----------+
+| project_name | Front_end | Back_end |
++--------------+-----------+----------+
+| GKD          | CSS       | SQLite   |
++--------------+-----------+----------+
+1 row in set (0.00 sec)
+
+_________________________________________________________________________________________________________________________
+
+
+Query - 3 :
+
+mysql> select Project_id,count(*) as Total_Emp from Employee_Detail group by(Project_id);
++------------+-----------+
+| Project_id | Total_Emp |
++------------+-----------+
+|          1 |         1 |
+|          2 |         1 |
+|          3 |         1 |
+|          4 |         1 |
+|          5 |         1 |
++------------+-----------+
+5 rows in set (0.00 sec)
+
+_________________________________________________________________________________________________________________________
+
+
+Query - 4 :
+
+(i) using sub-query
+
+mysql> select * from Employee_Detail where Project_id in(select project_id from Project_Detail where Front_end = "HTML" and Back_end = "MySQL");
++------+--------+----------+------------+
+| E_id | E_name | Address  | Project_id |
++------+--------+----------+------------+
+|    3 | Revati | Surat    |          1 |
+|    1 | Jainam | Vadodara |          3 |
+|    5 | Payal  | Mumbai   |          4 |
++------+--------+----------+------------+
+3 rows in set (0.00 sec)
+
+
+(ii) using join
+
+mysql> select E_id,E_name,Address,Project_id from Employee_Detail left join Project_Detail using(project_id) where Front_end = "HTML" and Back_end = "MySQL";
++------+--------+----------+------------+
+| E_id | E_name | Address  | Project_id |
++------+--------+----------+------------+
+|    3 | Revati | Surat    |          1 |
+|    1 | Jainam | Vadodara |          3 |
+|    5 | Payal  | Mumbai   |          4 |
++------+--------+----------+------------+
+3 rows in set (0.00 sec)
+
+_________________________________________________________________________________________________________________________
+
+
+Query - 5 :
+
+
+mysql> select ProjectDetail ->> '$.Title' as MyTitle,ProjectDetail ->> '$.Year' as myYear from Project_Detail;
++------------+------------+
+| MyTitle    | myYear     |
++------------+------------+
+| Doctor APP | 2020.02.23 |
+| E-nursery  | 2022.06.03 |
+| E-farming  | 2023.09.23 |
+| Doctor APP | 2021.12.14 |
+| E-farming  | 2019.03.06 |
++------------+------------+
+5 rows in set (0.00 sec)
+
+
+_________________________________________________________________________________________________________________________
+
+
+Query - 6 :
+
+
+mysql> select project_name,projectDetail ->> '$.Year' as Year,projectDetail ->> '$.Duration' as Duration from Project_Detail where projectDetail -> '$.Title' = "Doctor APP";
++--------------+------------+----------+
+| project_name | Year       | Duration |
++--------------+------------+----------+
+| LMS          | 2020.02.23 | 5        |
+| API          | 2021.12.14 | 3        |
++--------------+------------+----------+
+2 rows in set (0.00 sec)
+
+_________________________________________________________________________________________________________________________
+
+
+Query - 7 :
+
+
+mysql> select projectDetail ->> '$.Title' as Title from Project_Detail where year(projectDetail -> '$.Year') = 2020;
++------------+
+| Title      |
++------------+
+| Doctor APP |
++------------+
+1 row in set, 5 warnings (0.00 sec)
+
+_________________________________________________________________________________________________________________________
+
+
+Query - 8 :
+
+
+mysql> update Project_Detail set projectDetail = JSON_INSERT(projectDetail , '$.Month' , 'February') where projectDetail -> '$.Title' = "E-nursery";
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select projectDetail from Project_Detail;
++-------------------------------------------------------------------------------------+
+| projectDetail                                                                       |
++-------------------------------------------------------------------------------------+
+| {"Year": "2020.02.23", "Title": "Doctor APP", "Duration": "5"}                      |
+| {"Year": "2022.06.03", "Month": "February", "Title": "E-nursery", "Duration": "10"} |
+| {"Year": "2023.09.23", "Title": "E-farming", "Duration": "7"}                       |
+| {"Year": "2021.12.14", "Title": "Doctor APP", "Duration": "3"}                      |
+| {"Year": "2019.03.06", "Title": "E-farming", "Duration": "5"}                       |
++-------------------------------------------------------------------------------------+
+5 rows in set (0.00 sec)
+
+
+_________________________________________________________________________________________________________________________
+
+
+Query - 9 :
+
+
+mysql> update Project_Detail set projectDetail = JSON_REMOVE(projectDetail,'$.Duration') where project_id = 02;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select project_id,projectDetail from Project_Detail;
++------------+-------------------------------------------------------------------+
+| project_id | projectDetail                                                     |
++------------+-------------------------------------------------------------------+
+|          1 | {"Year": "2020.02.23", "Title": "Doctor APP", "Duration": "5"}    |
+|          2 | {"Year": "2022.06.03", "Month": "February", "Title": "E-nursery"} |
+|          3 | {"Year": "2023.09.23", "Title": "E-farming", "Duration": "7"}     |
+|          4 | {"Year": "2021.12.14", "Title": "Doctor APP", "Duration": "3"}    |
+|          5 | {"Year": "2019.03.06", "Title": "E-farming", "Duration": "5"}     |
++------------+-------------------------------------------------------------------+
+5 rows in set (0.00 sec)
+
+
+_________________________________________________________________________________________________________________________
+
+
+Query - 10 :
+
+
+mysql> update Project_Detail set projectDetail = JSON_REPLACE(projectDetail ,'$.Title','E-farming') where projectDetail ->> '$.Title' = "E-nursery";
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select project_id,projectDetail from Project_Detail;
++------------+-------------------------------------------------------------------+
+| project_id | projectDetail                                                     |
++------------+-------------------------------------------------------------------+
+|          1 | {"Year": "2020.02.23", "Title": "Doctor APP", "Duration": "5"}    |
+|          2 | {"Year": "2022.06.03", "Month": "February", "Title": "E-farming"} |
+|          3 | {"Year": "2023.09.23", "Title": "E-farming", "Duration": "7"}     |
+|          4 | {"Year": "2021.12.14", "Title": "Doctor APP", "Duration": "3"}    |
+|          5 | {"Year": "2019.03.06", "Title": "E-farming", "Duration": "5"}     |
++------------+-------------------------------------------------------------------+
+5 rows in set (0.00 sec)
+
+_________________________________________________________________________________________________________________________
+
+
+Query - 11 :
+
+
+mysql> select project_id,JSON_LENGTH(projectDetail) as LengthOf_ProjectDetail from Project_Detail;
++------------+------------------------+
+| project_id | LengthOf_ProjectDetail |
++------------+------------------------+
+|          1 |                      3 |
+|          2 |                      3 |
+|          3 |                      3 |
+|          4 |                      3 |
+|          5 |                      3 |
++------------+------------------------+
+5 rows in set (0.00 sec)
+
+_________________________________________________________________________________________________________________________
+
+
+Query - 12 :
+
+
+mysql> update Project_Detail set projectDetail = JSON_REPLACE(projectDetail ,'$.Title','E-nursery') where projectDetail ->> '$.Title' = "E-farming";
+Query OK, 3 rows affected (0.01 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
+
+mysql> select project_id,projectDetail from Project_Detail;
++------------+-------------------------------------------------------------------+
+| project_id | projectDetail                                                     |
++------------+-------------------------------------------------------------------+
+|          1 | {"Year": "2020.02.23", "Title": "Doctor APP", "Duration": "5"}    |
+|          2 | {"Year": "2022.06.03", "Month": "February", "Title": "E-nursery"} |
+|          3 | {"Year": "2023.09.23", "Title": "E-nursery", "Duration": "7"}     |
+|          4 | {"Year": "2021.12.14", "Title": "Doctor APP", "Duration": "3"}    |
+|          5 | {"Year": "2019.03.06", "Title": "E-nursery", "Duration": "5"}     |
++------------+-------------------------------------------------------------------+
+5 rows in set (0.00 sec)
+
+_________________________________________________________________________________________________________________________
+
+Query - 13 :
+
+
+mysql> select json_extract(projectDetail , '$.Title') as Title from Project_Detail;
++--------------+
+| Title        |
++--------------+
+| "Doctor APP" |
+| "E-nursery"  |
+| "E-nursery"  |
+| "Doctor APP" |
+| "E-nursery"  |
++--------------+
+5 rows in set (0.00 sec)
+
+_________________________________________________________________________________________________________________________
+
+
+Query - 14 :
+
+
+mysql> select project_id,project_name,Front_end,Back_end,projectDetail ->> '$.Title' as Title,projectDetail ->> '$.Duration' as Duration,projectDetail ->> '$.Month' as Month,projectDetail ->> '$.Year' as Year from Project_Detail;
++------------+--------------+-----------+----------+------------+----------+----------+------------+
+| project_id | project_name | Front_end | Back_end | Title      | Duration | Month    | Year       |
++------------+--------------+-----------+----------+------------+----------+----------+------------+
+|          1 | LMS          | HTML      | MySQL    | Doctor APP | 5        | NULL     | 2020.02.23 |
+|          2 | GKD          | CSS       | SQLite   | E-nursery  | NULL     | February | 2022.06.03 |
+|          3 | CMS          | HTML      | MySQL    | E-nursery  | 7        | NULL     | 2023.09.23 |
+|          4 | API          | HTML      | MySQL    | Doctor APP | 3        | NULL     | 2021.12.14 |
+|          5 | JDK          | PHP       | SQLite   | E-nursery  | 5        | NULL     | 2019.03.06 |
++------------+--------------+-----------+----------+------------+----------+----------+------------+
+5 rows in set (0.00 sec)
+
+
+_________________________________________________________________________________________________________________________

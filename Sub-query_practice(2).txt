@@ -1,0 +1,742 @@
+Roll : AS44
+Name : Parmar Darshan K.
+___________________________________________________________________________________
+
+->  Department Table :
+
+mysql> create table Department(D_id int primary key,Name varchar(12),Regional_group varchar(15));
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> insert into Department values(10,"ACCOUNTING","NEW YORK");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Department values(20,"RESEARCH","DALLAS");
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into Department values(30,"SALES","CHICAGO");
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into Department values(40,"OPERATIONS","BOSTON");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from Department;
++------+------------+----------------+
+| D_id | Name       | Regional_group |
++------+------------+----------------+
+|   10 | ACCOUNTING | NEW YORK       |
+|   20 | RESEARCH   | DALLAS         |
+|   30 | SALES      | CHICAGO        |
+|   40 | OPERATIONS | BOSTON         |
++------+------------+----------------+
+4 rows in set (0.00 sec)
+
+___________________________________________________________________________________
+
+->  Designation Table :
+
+mysql> create table Designation(Job_id int primary key,Functions varchar(15));
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> insert into Designation values(667,"CLERK");
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into Designation values(668,"STAFF");
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into Designation values(669,"ANALYST");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into Designation values(670,"SALES PERSON");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Designation values(671,"MANAGER");
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into Designation values(672,"PRESIDENT");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from Designation;
++--------+--------------+
+| Job_id | Functions    |
++--------+--------------+
+|    667 | CLERK        |
+|    668 | STAFF        |
+|    669 | ANALYST      |
+|    670 | SALES PERSON |
+|    671 | MANAGER      |
+|    672 | PRESIDENT    |
++--------+--------------+
+6 rows in set (0.00 sec)
+
+___________________________________________________________________________________
+
+->  Employee Table : add 2 foreign key -> (i) using create,(ii) using alter. 
+
+
+mysql> CREATE TABLE EMPLOYEE(
+    -> Emp_id int primary key,
+    -> Fname varchar(10),Lname varchar(10),
+    -> Job_id int,foreign key (Job_id) references Designation (job_id),
+    -> Manager_id int,
+    -> Hire_date date,Salary decimal(8,2),
+    -> Dep_id int );
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> alter table EMPLOYEE add foreign key(Dep_id) references Department(D_id);
+Query OK, 0 rows affected (0.11 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc EMPLOYEE;
++------------+--------------+------+-----+---------+-------+
+| Field      | Type         | Null | Key | Default | Extra |
++------------+--------------+------+-----+---------+-------+
+| Emp_id     | int          | NO   | PRI | NULL    |       |
+| Fname      | varchar(10)  | YES  |     | NULL    |       |
+| Lname      | varchar(10)  | YES  |     | NULL    |       |
+| Job_id     | int          | YES  | MUL | NULL    |       |
+| Manager_id | int          | YES  |     | NULL    |       |
+| Hire_date  | date         | YES  |     | NULL    |       |
+| Salary     | decimal(8,2) | YES  |     | NULL    |       |
+| Dep_id     | int          | YES  | MUL | NULL    |       |
++------------+--------------+------+-----+---------+-------+
+8 rows in set (0.04 sec)
+
+___________________________________________________________________________________
+
+
+mysql> insert into EMPLOYEE values(1,"SMITH","JOHN",667,7902,"1984.DEC.17",800,20);
+ERROR 1292 (22007): Incorrect date value: '1984.DEC.17' for column 'Hire_date' at row 1
+mysql> insert into EMPLOYEE values(1,"SMITH","JOHN",667,7902,"1984.12.17",800,20);
+Query OK, 1 row affected, 1 warning (0.01 sec)
+
+mysql> insert into EMPLOYEE values(2,"ALLEN","KEVIN",670,7698,"1985.02.20",1600,30);
+Query OK, 1 row affected, 1 warning (0.01 sec)
+
+mysql> insert into EMPLOYEE values(3,"DOYLE","JEAN",671,7839,"1985.04.04",2850,30);
+Query OK, 1 row affected, 1 warning (0.01 sec)
+
+mysql> insert into EMPLOYEE values(4,"DENNIS","LYNN",671,7839,"1985.03.15",2750,30);
+Query OK, 1 row affected, 1 warning (0.01 sec)
+
+mysql> insert into EMPLOYEE values(5,"BAKER","LESLIE",671,7839,"1985.06.10",2200,40);
+Query OK, 1 row affected, 1 warning (0.00 sec)
+
+___________________________________________________________________________________
+
+Note :
+
+mysql> insert into EMPLOYEE values(6,"WARK","CYNTHIA",670,7698,"1985.02.22",1500,50);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`Darshan`.`EMPLOYEE`, CONSTRAINT `EMPLOYEE_ibfk_2` FOREIGN KEY (`Dep_id`) REFERENCES `Department` (`D_id`))
+___________________________________________________________________________________
+
+mysql> select * from EMPLOYEE;
++--------+--------+--------+--------+------------+------------+---------+--------+
+| Emp_id | Fname  | Lname  | Job_id | Manager_id | Hire_date  | Salary  | Dep_id |
++--------+--------+--------+--------+------------+------------+---------+--------+
+|      1 | SMITH  | JOHN   |    667 |       7902 | 1984-12-17 |  800.00 |     20 |
+|      2 | ALLEN  | KEVIN  |    670 |       7698 | 1985-02-20 | 1600.00 |     30 |
+|      3 | DOYLE  | JEAN   |    671 |       7839 | 1985-04-04 | 2850.00 |     30 |
+|      4 | DENNIS | LYNN   |    671 |       7839 | 1985-03-15 | 2750.00 |     30 |
+|      5 | BAKER  | LESLIE |    671 |       7839 | 1985-06-10 | 2200.00 |     40 |
++--------+--------+--------+--------+------------+------------+---------+--------+
+5 rows in set (0.00 sec)
+
+___________________________________________________________________________________
+
+---------------------------------( SQL Queries )-----------------------------------
+
+Q - 1 :
+mysql> select * from EMPLOYEE;
++--------+--------+--------+--------+------------+------------+---------+--------+
+| Emp_id | Fname  | Lname  | Job_id | Manager_id | Hire_date  | Salary  | Dep_id |
++--------+--------+--------+--------+------------+------------+---------+--------+
+|      1 | SMITH  | JOHN   |    667 |       7902 | 1984-12-17 |  800.00 |     20 |
+|      2 | ALLEN  | KEVIN  |    670 |       7698 | 1985-02-20 | 1600.00 |     30 |
+|      3 | DOYLE  | JEAN   |    671 |       7839 | 1985-04-04 | 2850.00 |     30 |
+|      4 | DENNIS | LYNN   |    671 |       7839 | 1985-03-15 | 2750.00 |     30 |
+|      5 | BAKER  | LESLIE |    671 |       7839 | 1985-06-10 | 2200.00 |     40 |
++--------+--------+--------+--------+------------+------------+---------+--------+
+5 rows in set (0.00 sec)
+
+
+Q - 2 :
+mysql> select * from Department;
++------+------------+----------------+
+| D_id | Name       | Regional_group |
++------+------------+----------------+
+|   10 | ACCOUNTING | NEW YORK       |
+|   20 | RESEARCH   | DALLAS         |
+|   30 | SALES      | CHICAGO        |
+|   40 | OPERATIONS | BOSTON         |
++------+------------+----------------+
+4 rows in set (0.01 sec)
+
+
+Q - 3 :
+mysql> select * from Designation;
++--------+--------------+
+| Job_id | Functions    |
++--------+--------------+
+|    667 | CLERK        |
+|    668 | STAFF        |
+|    669 | ANALYST      |
+|    670 | SALES PERSON |
+|    671 | MANAGER      |
+|    672 | PRESIDENT    |
++--------+--------------+
+6 rows in set (0.00 sec)
+
+
+Q - 4_1 :
+mysql> select Regional_group from Department;
++----------------+
+| Regional_group |
++----------------+
+| NEW YORK       |
+| DALLAS         |
+| CHICAGO        |
+| BOSTON         |
++----------------+
+4 rows in set (0.00 sec)
+
+
+Q - 4_2 :
+mysql> select Fname,Lname,Salary from EMPLOYEE;
++--------+--------+---------+
+| Fname  | Lname  | Salary  |
++--------+--------+---------+
+| SMITH  | JOHN   |  800.00 |
+| ALLEN  | KEVIN  | 1600.00 |
+| DOYLE  | JEAN   | 2850.00 |
+| DENNIS | LYNN   | 2750.00 |
+| BAKER  | LESLIE | 2200.00 |
++--------+--------+---------+
+5 rows in set (0.00 sec)
+
+
+Q - 5 :
+mysql> select Emp_id as ID,Lname,Dep_id from EMPLOYEE;
++----+--------+--------+
+| ID | Lname  | Dep_id |
++----+--------+--------+
+|  1 | JOHN   |     20 |
+|  2 | KEVIN  |     30 |
+|  3 | JEAN   |     30 |
+|  4 | LYNN   |     30 |
+|  5 | LESLIE |     40 |
++----+--------+--------+
+5 rows in set (0.00 sec)
+
+
+Q - 6 :
+mysql> select Fname,Salary from EMPLOYEE;
++--------+---------+
+| Fname  | Salary  |
++--------+---------+
+| SMITH  |  800.00 |
+| ALLEN  | 1600.00 |
+| DOYLE  | 2850.00 |
+| DENNIS | 2750.00 |
+| BAKER  | 2200.00 |
++--------+---------+
+5 rows in set (0.01 sec)
+
+
+Q - 7 :
+mysql> select * from EMPLOYEE where Fname = "SMITH";
++--------+-------+-------+--------+------------+------------+--------+--------+
+| Emp_id | Fname | Lname | Job_id | Manager_id | Hire_date  | Salary | Dep_id |
++--------+-------+-------+--------+------------+------------+--------+--------+
+|      1 | SMITH | JOHN  |    667 |       7902 | 1984-12-17 | 800.00 |     20 |
++--------+-------+-------+--------+------------+------------+--------+--------+
+1 row in set (0.00 sec)
+
+
+Q - 8 :
+mysql> select * from EMPLOYEE where Dep_id = 20;
++--------+-------+-------+--------+------------+------------+--------+--------+
+| Emp_id | Fname | Lname | Job_id | Manager_id | Hire_date  | Salary | Dep_id |
++--------+-------+-------+--------+------------+------------+--------+--------+
+|      1 | SMITH | JOHN  |    667 |       7902 | 1984-12-17 | 800.00 |     20 |
++--------+-------+-------+--------+------------+------------+--------+--------+
+1 row in set (0.00 sec)
+
+Q - 9 :
+mysql> select * from EMPLOYEE where Salary between 3000 and 4500;
+Empty set (0.00 sec)
+
+_____________________________________________________________________________
+
+Q - 10 :
+
+(using 'in')
+
+mysql> select * from EMPLOYEE where Dep_id in(20,30);
++--------+--------+-------+--------+------------+------------+---------+--------+
+| Emp_id | Fname  | Lname | Job_id | Manager_id | Hire_date  | Salary  | Dep_id |
++--------+--------+-------+--------+------------+------------+---------+--------+
+|      1 | SMITH  | JOHN  |    667 |       7902 | 1984-12-17 |  800.00 |     20 |
+|      2 | ALLEN  | KEVIN |    670 |       7698 | 1985-02-20 | 1600.00 |     30 |
+|      3 | DOYLE  | JEAN  |    671 |       7839 | 1985-04-04 | 2850.00 |     30 |
+|      4 | DENNIS | LYNN  |    671 |       7839 | 1985-03-15 | 2750.00 |     30 |
++--------+--------+-------+--------+------------+------------+---------+--------+
+4 rows in set (0.00 sec)
+
+
+(using 'or')
+
+mysql> select * from EMPLOYEE where Dep_id = 20 or Dep_id = 30;
++--------+--------+-------+--------+------------+------------+---------+--------+
+| Emp_id | Fname  | Lname | Job_id | Manager_id | Hire_date  | Salary  | Dep_id |
++--------+--------+-------+--------+------------+------------+---------+--------+
+|      1 | SMITH  | JOHN  |    667 |       7902 | 1984-12-17 |  800.00 |     20 |
+|      2 | ALLEN  | KEVIN |    670 |       7698 | 1985-02-20 | 1600.00 |     30 |
+|      3 | DOYLE  | JEAN  |    671 |       7839 | 1985-04-04 | 2850.00 |     30 |
+|      4 | DENNIS | LYNN  |    671 |       7839 | 1985-03-15 | 2750.00 |     30 |
++--------+--------+-------+--------+------------+------------+---------+--------+
+4 rows in set (0.00 sec)
+
+_____________________________________________________________________________
+
+Q - 11 :
+mysql> select * from EMPLOYEE where Dep_id not in(10,30);
++--------+-------+--------+--------+------------+------------+---------+--------+
+| Emp_id | Fname | Lname  | Job_id | Manager_id | Hire_date  | Salary  | Dep_id |
++--------+-------+--------+--------+------------+------------+---------+--------+
+|      1 | SMITH | JOHN   |    667 |       7902 | 1984-12-17 |  800.00 |     20 |
+|      5 | BAKER | LESLIE |    671 |       7839 | 1985-06-10 | 2200.00 |     40 |
++--------+-------+--------+--------+------------+------------+---------+--------+
+2 rows in set (0.00 sec)
+
+
+Q - 12 : List out the employees whose last name starts with “L”.
+
+mysql> select * from EMPLOYEE where Lname like "L%";
++--------+--------+--------+--------+------------+------------+---------+--------+
+| Emp_id | Fname  | Lname  | Job_id | Manager_id | Hire_date  | Salary  | Dep_id |
++--------+--------+--------+--------+------------+------------+---------+--------+
+|      4 | DENNIS | LYNN   |    671 |       7839 | 1985-03-15 | 2750.00 |     30 |
+|      5 | BAKER  | LESLIE |    671 |       7839 | 1985-06-10 | 2200.00 |     40 |
++--------+--------+--------+--------+------------+------------+---------+--------+
+2 rows in set (0.00 sec)
+
+
+Q - 13 :
+
+-> 1st way
+mysql> select Emp_id,Lname from EMPLOYEE order by Emp_id;
++--------+--------+
+| Emp_id | Lname  |
++--------+--------+
+|      1 | JOHN   |
+|      2 | KEVIN  |
+|      3 | JEAN   |
+|      4 | LYNN   |
+|      5 | LESLIE |
++--------+--------+
+5 rows in set (0.00 sec)
+
+-> 2nd way
+mysql> select Emp_id,Lname from EMPLOYEE group by(Emp_id) having(Emp_id) order by count(Emp_id) asc;
++--------+--------+
+| Emp_id | Lname  |
++--------+--------+
+|      1 | JOHN   |
+|      2 | KEVIN  |
+|      3 | JEAN   |
+|      4 | LYNN   |
+|      5 | LESLIE |
++--------+--------+
+5 rows in set (0.00 sec)
+
+
+Q - 14 :
+mysql> select Salary as Emp_salary from EMPLOYEE order by Salary desc;
++------------+
+| Emp_salary |
++------------+
+|    2850.00 |
+|    2750.00 |
+|    2200.00 |
+|    1600.00 |
+|     800.00 |
++------------+
+5 rows in set (0.00 sec)
+
+
+Q - 15 :
+mysql> select max(Salary) as Maximum_salary from EMPLOYEE;
++----------------+
+| Maximum_salary |
++----------------+
+|        2850.00 |
++----------------+
+1 row in set (0.00 sec)
+
+
+Q - 16 :
+mysql> select avg(Salary) as Total_amt from EMPLOYEE;
++-------------+
+| Total_amt   |
++-------------+
+| 2040.000000 |
++-------------+
+1 row in set (0.00 sec)
+
+__________________________________________________________________________
+
+Q - 17 : here,row 6 is not available,so name is not changed.
+
+mysql> update EMPLOYEE set Fname = "REVITA" where Emp_id = 6;
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+__________________________________________________________________________
+
+Q - 18 :
+mysql> select count(*) as Tot_Emp from EMPLOYEE where Salary >= 1600;
++---------+
+| Tot_Emp |
++---------+
+|       4 |
++---------+
+1 row in set (0.00 sec)
+
+
+Q - 19 :
+mysql> alter table EMPLOYEE add column City varchar(10);
+Query OK, 0 rows affected (0.08 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from EMPLOYEE;
++--------+--------+--------+--------+------------+------------+---------+--------+------+
+| Emp_id | Fname  | Lname  | Job_id | Manager_id | Hire_date  | Salary  | Dep_id | City |
++--------+--------+--------+--------+------------+------------+---------+--------+------+
+|      1 | SMITH  | JOHN   |    667 |       7902 | 1984-12-17 |  800.00 |     20 | NULL |
+|      2 | ALLEN  | KEVIN  |    670 |       7698 | 1985-02-20 | 1600.00 |     30 | NULL |
+|      3 | DOYLE  | JEAN   |    671 |       7839 | 1985-04-04 | 2850.00 |     30 | NULL |
+|      4 | DENNIS | LYNN   |    671 |       7839 | 1985-03-15 | 2750.00 |     30 | NULL |
+|      5 | BAKER  | LESLIE |    671 |       7839 | 1985-06-10 | 2200.00 |     40 | NULL |
++--------+--------+--------+--------+------------+------------+---------+--------+------+
+5 rows in set (0.00 sec)
+
+
+Q - 20 :
+mysql> select count(*) as Tot_Emp from EMPLOYEE where Fname like "%N";
++---------+
+| Tot_Emp |
++---------+
+|       1 |
++---------+
+1 row in set (0.01 sec)
+
+
+Q - 21 :
+mysql> select Fname from EMPLOYEE where Dep_id = 40;
++-------+
+| Fname |
++-------+
+| BAKER |
++-------+
+1 row in set (0.00 sec)
+
+
+Q - 22 :
+
+-> 1st way :
+mysql> select count(*) as Tot_Emp from EMPLOYEE where Dep_id <> 50;
++---------+
+| Tot_Emp |
++---------+
+|       5 |
++---------+
+1 row in set (0.00 sec)
+
+-> 2nd way :
+mysql> select count(*) as Tot_Emp from EMPLOYEE;
++---------+
+| Tot_Emp |
++---------+
+|       5 |
++---------+
+1 row in set (0.00 sec)
+
+
+Q - 23 :
+mysql> select Functions from Designation where Job_id = 669;
++-----------+
+| Functions |
++-----------+
+| ANALYST   |
++-----------+
+1 row in set (0.00 sec)
+
+
+Q - 24 : (multiple row sub-query)
+
+mysql> select * from EMPLOYEE where salary >= (select avg(Salary) from EMPLOYEE);
++--------+--------+--------+--------+------------+------------+---------+--------+------+
+| Emp_id | Fname  | Lname  | Job_id | Manager_id | Hire_date  | Salary  | Dep_id | City |
++--------+--------+--------+--------+------------+------------+---------+--------+------+
+|      3 | DOYLE  | JEAN   |    671 |       7839 | 1985-04-04 | 2850.00 |     30 | NULL |
+|      4 | DENNIS | LYNN   |    671 |       7839 | 1985-03-15 | 2750.00 |     30 | NULL |
+|      5 | BAKER  | LESLIE |    671 |       7839 | 1985-06-10 | 2200.00 |     40 | NULL |
++--------+--------+--------+--------+------------+------------+---------+--------+------+
+3 rows in set (0.00 sec)
+
+
+Q - 25
+mysql> select Fname from EMPLOYEE where Fname like "_E%";
++--------+
+| Fname  |
++--------+
+| DENNIS |
++--------+
+1 row in set (0.00 sec)
+
+
+Q - 26 :
+mysql> select Fname from EMPLOYEE where Fname like "%N";
++-------+
+| Fname |
++-------+
+| ALLEN |
++-------+
+1 row in set (0.00 sec)
+
+
+Q - 27 :
+mysql> update EMPLOYEE set Lname = "PARKER" where Emp_id = 3;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select Lname from EMPLOYEE;
++--------+
+| Lname  |
++--------+
+| JOHN   |
+| KEVIN  |
+| PARKER |
+| LYNN   |
+| LESLIE |
++--------+
+5 rows in set (0.00 sec)
+
+___________________________________________________________________________________
+
+---------------------------------( SUB-Queries )-----------------------------------
+
+
+query - 1 : (single row sub-query)
+
+mysql> select * from EMPLOYEE where Salary = (select max(Salary) from EMPLOYEE);
++--------+-------+--------+--------+------------+------------+---------+--------+------+
+| Emp_id | Fname | Lname  | Job_id | Manager_id | Hire_date  | Salary  | Dep_id | City |
++--------+-------+--------+--------+------------+------------+---------+--------+------+
+|      3 | DOYLE | PARKER |    671 |       7839 | 1985-04-04 | 2850.00 |     30 | NULL |
++--------+-------+--------+--------+------------+------------+---------+--------+------+
+1 row in set (0.00 sec)
+
+
+query - 2 : (multiple row sub-query)
+
+mysql> select * from EMPLOYEE where Dep_id in (select D_id from Department where Name = "Research");
++--------+-------+-------+--------+------------+------------+--------+--------+------+
+| Emp_id | Fname | Lname | Job_id | Manager_id | Hire_date  | Salary | Dep_id | City |
++--------+-------+-------+--------+------------+------------+--------+--------+------+
+|      1 | SMITH | JOHN  |    667 |       7902 | 1984-12-17 | 800.00 |     20 | NULL |
++--------+-------+-------+--------+------------+------------+--------+--------+------+
+1 row in set (0.00 sec)
+
+________________________________________________________________________________________
+
+query - 3 : here, empty set is occur, because employees are not working as “Analyst”.
+
+mysql> select * from EMPLOYEE where Job_id in (select job_id from Designation where Functions = "Analyst");
+Empty set (0.00 sec)
+
+________________________________________________________________________________________
+
+query - 4 : here, empty set occur, because employees are not working in “New york”.
+
+mysql> select * from EMPLOYEE where Dep_id in (select D_id from Department where NAME = "NEW YORK");
+Empty set (0.00 sec)
+
+________________________________________________________________________________________
+
+query - 5 :
+mysql> select count(*) as Tot_emp from EMPLOYEE where Dep_id in (select D_id from Department where Name = "SALES");
++---------+
+| Tot_emp |
++---------+
+|       3 |
++---------+
+1 row in set (0.00 sec)
+
+________________________________________________________________________________________
+
+query - 6 : here, 0 rows affected, employees are not working as a staff.
+
+mysql> update EMPLOYEE set Salary = Salary + (Salary * 15 / 100) where Job_id in (select job_id from Designation where Functions = "STAFF");
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+________________________________________________________________________________________
+
+query - 7 :
+mysql> select max(Salary) as SecondHighestSalary from EMPLOYEE where Salary < (select max(Salary) from EMPLOYEE);
++---------------------+
+| SecondHighestSalary |
++---------------------+
+|             2750.00 |
++---------------------+
+1 row in set (0.00 sec)
+
+________________________________________________________________________________________
+
+query - 8 : here, empty set is occur, because any employee don't have 'LYNN' as first name.
+
+mysql> select Functions from Designation where job_id in (select Job_id from EMPLOYEE where Fname = "LYNN");
+Empty set (0.00 sec)
+
+
+query - 9 : (Multiple row sub-query)
+
+mysql> select * from EMPLOYEE where Salary > (select avg(Salary) from EMPLOYEE);
++--------+--------+--------+--------+------------+------------+---------+--------+------+
+| Emp_id | Fname  | Lname  | Job_id | Manager_id | Hire_date  | Salary  | Dep_id | City |
++--------+--------+--------+--------+------------+------------+---------+--------+------+
+|      3 | DOYLE  | PARKER |    671 |       7839 | 1985-04-04 | 2850.00 |     30 | NULL |
+|      4 | DENNIS | LYNN   |    671 |       7839 | 1985-03-15 | 2750.00 |     30 | NULL |
+|      5 | BAKER  | LESLIE |    671 |       7839 | 1985-06-10 | 2200.00 |     40 | NULL |
++--------+--------+--------+--------+------------+------------+---------+--------+------+
+3 rows in set (0.00 sec)
+
+__________________________________________________________________________________________
+
+query - 10 : here, also empty set occur, because any employee not working as "ANALYST".
+
+mysql> select Hire_date from EMPLOYEE where Job_id in(select job_id from Designation where FUNCTIONS = "ANALYST");
+Empty set (0.00 sec)
+
+__________________________________________________________________________________________
+
+query - 11 :
+mysql> select job_id from Designation where job_id in(select Job_id from EMPLOYEE where Salary >= 1600);
++--------+
+| job_id |
++--------+
+|    670 |
+|    671 |
++--------+
+2 rows in set (0.00 sec)
+
+
+query - 12 :
+mysql> select FUNCTIONS from Designation where job_id in(select Job_id from EMPLOYEE where Fname = "BAKER");
++-----------+
+| FUNCTIONS |
++-----------+
+| MANAGER   |
++-----------+
+1 row in set (0.01 sec)
+
+
+query - 13 :
+mysql> select Name from Department where D_id in(select Dep_id from EMPLOYEE where year(Hire_date) = 1984);
++----------+
+| Name     |
++----------+
+| RESEARCH |
++----------+
+1 row in set (0.00 sec)
+
+
+query - 14 :
+mysql> select FUNCTIONS from Designation where job_id in(select Job_id from EMPLOYEE where Manager_id between 7790 and 790
+5);
++-----------+
+| FUNCTIONS |
++-----------+
+| CLERK     |
+| MANAGER   |
++-----------+
+2 rows in set (0.00 sec)
+
+
+query - 15 :
+mysql> select concat(Fname," ",Lname) as Full_Name from EMPLOYEE where Dep_id in(select D_id from Department where Regional_group like "D%");
++------------+
+| Full_Name  |
++------------+
+| SMITH JOHN |
++------------+
+1 row in set (0.00 sec)
+
+
+______________________________________________________________________________________________
+
+---------------------------------------------( Joins )----------------------------------------
+
+
+Query - 1 : (both ways represent same output)
+
+-> 1ST WAY.. ( JOIN )
+mysql> select * from EMPLOYEE JOIN Department ON EMPLOYEE.Dep_id = Department.D_id;
++--------+--------+--------+--------+------------+------------+---------+--------+------+------+------------+----------------+
+| Emp_id | Fname  | Lname  | Job_id | Manager_id | Hire_date  | Salary  | Dep_id | City | D_id | Name       | Regional_group |
++--------+--------+--------+--------+------------+------------+---------+--------+------+------+------------+----------------+
+|      1 | SMITH  | JOHN   |    667 |       7902 | 1984-12-17 |  800.00 |     20 | NULL |   20 | RESEARCH   | DALLAS         |
+|      2 | ALLEN  | KEVIN  |    670 |       7698 | 1985-02-20 | 1600.00 |     30 | NULL |   30 | SALES      | CHICAGO        |
+|      3 | DOYLE  | PARKER |    671 |       7839 | 1985-04-04 | 2850.00 |     30 | NULL |   30 | SALES      | CHICAGO        |
+|      4 | DENNIS | LYNN   |    671 |       7839 | 1985-03-15 | 2750.00 |     30 | NULL |   30 | SALES      | CHICAGO        |
+|      5 | BAKER  | LESLIE |    671 |       7839 | 1985-06-10 | 2200.00 |     40 | NULL |   40 | OPERATIONS | BOSTON         |
++--------+--------+--------+--------+------------+------------+---------+--------+------+------+------------+----------------+
+5 rows in set (0.00 sec)
+
+
+-> 2ND WAY..(LEFT OUTER JOIN)
+mysql> select * from EMPLOYEE LEFT OUTER JOIN Department ON EMPLOYEE.Dep_id = Department.D_id;
++--------+--------+--------+--------+------------+------------+---------+--------+------+------+------------+----------------+
+| Emp_id | Fname  | Lname  | Job_id | Manager_id | Hire_date  | Salary  | Dep_id | City | D_id | Name       | Regional_group |
++--------+--------+--------+--------+------------+------------+---------+--------+------+------+------------+----------------+
+|      1 | SMITH  | JOHN   |    667 |       7902 | 1984-12-17 |  800.00 |     20 | NULL |   20 | RESEARCH   | DALLAS         |
+|      2 | ALLEN  | KEVIN  |    670 |       7698 | 1985-02-20 | 1600.00 |     30 | NULL |   30 | SALES      | CHICAGO        |
+|      3 | DOYLE  | PARKER |    671 |       7839 | 1985-04-04 | 2850.00 |     30 | NULL |   30 | SALES      | CHICAGO        |
+|      4 | DENNIS | LYNN   |    671 |       7839 | 1985-03-15 | 2750.00 |     30 | NULL |   30 | SALES      | CHICAGO        |
+|      5 | BAKER  | LESLIE |    671 |       7839 | 1985-06-10 | 2200.00 |     40 | NULL |   40 | OPERATIONS | BOSTON         |
++--------+--------+--------+--------+------------+------------+---------+--------+------+------+------------+----------------+
+5 rows in set (0.00 sec)
+
+
+
+Query - 2 : 
+mysql> select count(*) as tot_Emp from EMPLOYEE join Department on EMPLOYEE.Dep_id = Department.D_id where Name = "SALES";
++---------+
+| tot_Emp |
++---------+
+|       3 |
++---------+
+1 row in set (0.00 sec)
+
+
+Query - 3 :
+mysql> select * from EMPLOYEE join Department on EMPLOYEE.Dep_id = Department.D_id where Name in ("SALES","OPERATIONS");
++--------+--------+--------+--------+------------+------------+---------+--------+------+------+------------+----------------+
+| Emp_id | Fname  | Lname  | Job_id | Manager_id | Hire_date  | Salary  | Dep_id | City | D_id | Name       | Regional_group |
++--------+--------+--------+--------+------------+------------+---------+--------+------+------+------------+----------------+
+|      2 | ALLEN  | KEVIN  |    670 |       7698 | 1985-02-20 | 1600.00 |     30 | NULL |   30 | SALES      | CHICAGO        |
+|      3 | DOYLE  | PARKER |    671 |       7839 | 1985-04-04 | 2850.00 |     30 | NULL |   30 | SALES      | CHICAGO        |
+|      4 | DENNIS | LYNN   |    671 |       7839 | 1985-03-15 | 2750.00 |     30 | NULL |   30 | SALES      | CHICAGO        |
+|      5 | BAKER  | LESLIE |    671 |       7839 | 1985-06-10 | 2200.00 |     40 | NULL |   40 | OPERATIONS | BOSTON         |
++--------+--------+--------+--------+------------+------------+---------+--------+------+------+------------+----------------+
+4 rows in set (0.01 sec)
+
+
+Query - 4 :
+mysql> select count(*) as Tot_Emp from EMPLOYEE left join Designation on EMPLOYEE.Job_id = Designation.job_id where FUNCTIONS = "MANAGER";
++---------+
+| Tot_Emp |
++---------+
+|       3 |
++---------+
+1 row in set (0.00 sec)
